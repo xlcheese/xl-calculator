@@ -15,6 +15,8 @@ from config import CONVERTER_MODES, VALID_MODES
 from currency import DEFAULT_INTERVAL, MAX_INTERVAL, Rates, background_refresh_available, set_background_refresh
 from engine import DEFAULT_DECIMALS, MAX_DECIMALS, NUMBER_FORMAT, format_number, mpmath
 from history import SavedHistory
+from buffet import LAYOUT_FIXED
+from menus import BUFFET_DEFAULTS, BUFFET_OPTIONS, MENU_COUNT, choice_label, choice_note
 
 
 MODE_DESCRIPTIONS = {
@@ -47,6 +49,7 @@ class PreferencesWindow(Gtk.Window):
         self.stack = Gtk.Stack()
         self.stack.add_titled(self.build_general_page(), "General", _("General"))
         self.stack.add_titled(self.build_modes_page(), "Modes", _("Modes"))
+        self.stack.add_titled(self.build_menu_page(), "Menu", _("Menu"))
         sidebar = Gtk.StackSidebar()
         sidebar.set_stack(self.stack)
         pages = Gtk.Box()
@@ -203,6 +206,33 @@ class PreferencesWindow(Gtk.Window):
         box.pack_start(note, False, False, 0)
         return scroller
 
+    def build_menu_page(self):
+        scroller, box = self.page()
+        c = self.calculator
+        self.heading(box, _("Menu"))
+        self.buffet_switch = Gtk.Switch()
+        self.buffet_switch.connect("notify::active", lambda s, p: self.changed(lambda: c.set_buffet_on(s.get_active())))
+        self.buffet_hint = self.row(box, _("Buffet menu"), self.buffet_switch, "")
+
+        self.heading(box, _("Buffet menu"))
+        self.buffet_combos, self.buffet_hints, self.buffet_lines = {}, {}, []
+        same_width = Gtk.SizeGroup(mode=Gtk.SizeGroupMode.HORIZONTAL)    # the menus line up in one column
+        for key, title, choices in BUFFET_OPTIONS:
+            combo = self.combo([(choice_label(label), value) for value, label, note in choices],
+                               lambda w, k=key, ch=choices: self.changed(
+                                   lambda: c.set_buffet_setting(k, ch[w.get_active()][0])))
+            same_width.add_widget(combo)
+            self.buffet_hints[key] = self.row(box, _(title), combo, "")
+            self.buffet_combos[key] = combo
+            self.buffet_lines.append(combo.get_parent())
+            if key == "layout":
+                self.buffet_per_row = Gtk.SpinButton.new_with_range(1, MENU_COUNT, 1)
+                self.buffet_per_row.connect("value-changed", lambda s: self.changed(
+                    lambda: c.set_buffet_setting("per-row", s.get_value_as_int())))
+                per_row = _("menus per row")
+                self.row(box, per_row[:1].upper() + per_row[1:], self.buffet_per_row)
+        return scroller
+
     # --- keeping the controls and the calculator in step
     def changed(self, apply):
         if not self.syncing:
@@ -238,6 +268,18 @@ class PreferencesWindow(Gtk.Window):
             _("Needs xl-Calculator installed from its package.") if not available
             else _("Rates will refresh in the background even when closed.") if c.currency_background
             else _("Rates will only refresh while xl-Calculator is open."))
+        self.buffet_switch.set_active(c.buffet_on)
+        self.buffet_hint.set_text(_("All the menus at once, from a button in the title bar.") if c.buffet_on
+                                  else _("Off: a menu bar under the title bar."))
+        for key, title, choices in BUFFET_OPTIONS:
+            values = [value for value, label, note in choices]
+            index = values.index(c.buffet_settings[key])
+            self.buffet_combos[key].set_active(index)
+            self.buffet_hints[key].set_text(choice_note(choices[index][2]))
+        for line in self.buffet_lines:
+            line.set_sensitive(c.buffet_on)
+        self.buffet_per_row.set_value(c.buffet_settings["per-row"])
+        self.buffet_per_row.get_parent().set_sensitive(c.buffet_on and c.buffet_settings["layout"] == LAYOUT_FIXED)
         for mode, switch in self.mode_switches.items():
             on = mode in c.enabled_modes
             switch.set_active(on)
@@ -381,4 +423,7 @@ class PreferencesActions:
         self.set_currency_background(False)
         self.set_currency_interval(DEFAULT_INTERVAL)
         self.set_currency_auto(False)
+        self.set_buffet_on(True)
+        for key, value in BUFFET_DEFAULTS.items():
+            self.set_buffet_setting(key, value)
         self.sync_preferences()

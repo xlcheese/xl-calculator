@@ -34,10 +34,11 @@ from preferences import PreferencesActions
 from documentation import HelpWindow
 from easter_egg import UpsideDown
 from currency import CURRENCY, CURRENCY_START, CODE_RE, DEFAULT_INTERVAL, MAX_INTERVAL, CurrencyMode
+from menus import BUFFET_DEFAULTS, BuffetMenuBar, checked_buffet_settings
 
 
 class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, ConverterMode, CurrencyMode,
-                  HistoryPanel, TapePrinting, PreferencesActions, UpsideDown, Gtk.Window):
+                  HistoryPanel, TapePrinting, PreferencesActions, UpsideDown, BuffetMenuBar, Gtk.Window):
     """One calculator window: the menus, the display, the keypad for the current mode,
     and the history. Each mode's own keys come from its module (see the classes above)."""
 
@@ -111,6 +112,8 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         self.result_value = None        # the answer on screen, unrounded, to re-show if decimals change
         self.preferences_window = None
         NUMBER_FORMAT.update(decimals=DEFAULT_DECIMALS, show_all=False)
+        self.buffet_on = True           # Preferences → Menu: the Buffet menu, or a menu bar
+        self.buffet_settings = dict(BUFFET_DEFAULTS)
 
         self.load_window_settings()
 
@@ -145,7 +148,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         main_vbox.pack_start(menubar, False, False, 0)
 
         file_menu = Gtk.Menu()
-        file_item = Gtk.MenuItem(label=_("File"))
+        file_item = Gtk.MenuItem.new_with_mnemonic(_("_File"))
         file_item.set_submenu(file_menu)
         menubar.append(file_item)
 
@@ -180,7 +183,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         file_menu.append(quit_item)
 
         edit_menu = Gtk.Menu()
-        edit_item = Gtk.MenuItem(label=_("Edit"))
+        edit_item = Gtk.MenuItem.new_with_mnemonic(_("_Edit"))
         edit_item.set_submenu(edit_menu)
         menubar.append(edit_item)
 
@@ -201,7 +204,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         edit_menu.append(preferences_item)
 
         mode_menu = Gtk.Menu()
-        mode_item = Gtk.MenuItem(label=_("Mode"))
+        mode_item = Gtk.MenuItem.new_with_mnemonic(_("_Mode"))
         mode_item.set_submenu(mode_menu)
 
         basic_radio = Gtk.RadioMenuItem(label=_("Basic"))
@@ -241,7 +244,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
                                  Gtk.AccelFlags.VISIBLE)
 
         view_menu = Gtk.Menu()
-        view_item = Gtk.MenuItem(label=_("View"))
+        view_item = Gtk.MenuItem.new_with_mnemonic(_("_View"))
         view_item.set_submenu(view_menu)
         menubar.append(view_item)
         menubar.append(mode_item)           # File Edit View Mode Help
@@ -276,7 +279,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         view_menu.append(reset_view_item)
 
         help_menu = Gtk.Menu()
-        help_item = Gtk.MenuItem(label=_("Help"))
+        help_item = Gtk.MenuItem.new_with_mnemonic(_("_Help"))
         help_item.set_submenu(help_menu)
         menubar.append(help_item)
 
@@ -295,6 +298,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         about_item = Gtk.MenuItem(label=_("About"))
         about_item.connect("activate", self.show_about)
         help_menu.append(about_item)
+        self.set_up_menus(menubar, accel_group)     # the Buffet menu and its header bar, unless the menu bar is chosen
 
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)   # 6 px between the history and the display
         vbox.set_margin_start(12)
@@ -642,6 +646,26 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
             color.alpha = alpha
         return color.to_string()
 
+    @staticmethod
+    def theme_button_min_height():
+        """The least height the theme gives a button's inside: kept for the keys' labels, which hold the
+        padding (see apply_custom_styles), so the keys are as tall as the theme makes other buttons."""
+        probe = Gtk.Button()
+        height = probe.get_style_context().get_property("min-height", Gtk.StateFlags.NORMAL)
+        probe.destroy()
+        return height if isinstance(height, int) and height >= 0 else 0
+
+    @staticmethod
+    def theme_button_inner_radius():
+        """How round the inside of the theme's buttons is: the corner radius less the border."""
+        probe = Gtk.Button()
+        context = probe.get_style_context()
+        radius = context.get_property("border-radius", Gtk.StateFlags.NORMAL)
+        border = context.get_border(Gtk.StateFlags.NORMAL)
+        probe.destroy()
+        radius = radius if isinstance(radius, int) else 3
+        return max(0, radius - max(border.left, border.top))
+
     def apply_custom_styles(self):
         display_font = self.base_font_size + 5
         error_font = max(10, self.base_font_size - 2)
@@ -677,16 +701,23 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
             .history-row {{ padding: 2px; border-radius: 3px; }}
             .history-row:hover {{ background-color: {entry_tint}; }}
             .calc-mono {{ font-family: monospace; }}
-            .calc-keypad button.compact {{ padding-left: 2px; padding-right: 2px; }}
             .numeric-button label, .clear-button label {{ font-weight: bold; font-size: {self.base_font_size}px; }}
-            /* the number keys stay as the theme draws them; every other key gets a faint tint of the
-               theme's text color on top, so it reads a shade darker (or lighter, in a dark theme) */
-            .calc-keypad button:not(.numeric-button):not(.suggested-action) {{
-                box-shadow: inset 0 0 0 999px {self.theme_button_text_color(0.06)};
-            }}
             /* only the calculator's own keys and unit menus: the title bar and dialogs keep the theme's look */
-            .calc-keypad button, .calc-unit-menu button {{ padding: 8px; }}
+            .calc-unit-menu button {{ padding: 8px; }}
             .calc-keypad button label {{ font-size: {self.base_font_size}px; }}
+            /* Every key's padding is on its label, which fills the key, not on the key itself. The number keys
+               stay as the theme draws them; every other key gets a faint tint of the theme's text color behind
+               its label, so it reads a shade darker (or lighter, in a dark theme), while the theme still draws
+               the key itself: its background, border, highlights and drop shadow. The padding is the same for
+               every key, so a key that changes style (Download Rates losing its green) never changes size:
+               the keypad's rows share one height, and a moment's taller key would grow the window. */
+            .calc-keypad button {{ padding: 0; }}
+            .calc-keypad button > * {{ padding: 8px; border-radius: {self.theme_button_inner_radius()}px;
+                                      min-height: {self.theme_button_min_height()}px; }}
+            .calc-keypad button.compact > * {{ padding-left: 2px; padding-right: 2px; }}
+            .calc-keypad button:not(.numeric-button):not(.suggested-action) > * {{
+                background-color: {self.theme_button_text_color(0.06)};
+            }}
         """.encode('utf-8')
         self.css_provider.load_from_data(style_css)
 
@@ -735,6 +766,8 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
                     if isinstance(interval, int) and 1 <= interval <= MAX_INTERVAL:
                         self.currency_interval = interval
                     self.currency_background = config.get("currency_background") is True
+                    self.buffet_on = config.get("buffet_menu") is not False
+                    self.buffet_settings = checked_buffet_settings(config.get("buffet"))
                     return
         except Exception as e:
             print(f"Failed to read settings cache: {e}")
@@ -762,6 +795,8 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
                 "currency_auto": self.currency_auto,
                 "currency_interval": self.currency_interval,
                 "currency_background": self.currency_background,
+                "buffet_menu": self.buffet_on,
+                "buffet": self.buffet_settings,
             }
             os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
             with open(CONFIG_FILE, "w") as f:
@@ -981,6 +1016,8 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         keyname = Gdk.keyval_name(event.keyval)
         if self.flip_snapshot is not None:
             return True                     # ignore typing while upside down
+        if self.buffet_key(event):
+            return True
         modifiers = event.state & (Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.MOD1_MASK
                                    | Gdk.ModifierType.SHIFT_MASK)
         if modifiers == Gdk.ModifierType.CONTROL_MASK and keyname:

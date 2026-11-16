@@ -19,7 +19,8 @@ SHORTCUTS_PAGE = "shortcuts"
 
 
 SHORTCUT_COLUMNS = (
-    ((_("Windows"), (("<Control>n", _("Open a new window")),
+    ((_("Windows"), (("F10", _("Open the menu")),
+                     ("<Control>n", _("Open a new window")),
                      ("<Control>w", _("Close the window")),
                      ("<Control>q", _("Quit xl-Calculator")))),
      (_("Modes"), (("<Control><Alt>b", _("Switch to Basic")),
@@ -79,6 +80,8 @@ HELP_PAGES = (
           "<b>Edit → Copy</b> copies the display. <b>Edit → Paste</b> pastes a number or a simple calculation."),
         _("<b>Window size and text size</b>\n"
           "Stretch the history taller and every mode keeps that height. Each mode remembers its own width. <b>View → Larger Font</b>, <b>Smaller Font</b>, and <b>Reset Font Size</b> change the text size, and <b>View → Reset View</b> returns to the original window size."),
+        _("<b>The menu</b>\n"
+          "The button at the right of the title bar opens the Buffet menu: every menu at once, side by side. F10 opens it too, and Alt with a menu's underlined letter opens it at that menu, such as Alt+M for Mode. Preferences → Menu changes how it looks, or brings back a menu bar."),
         _("<b>Preferences</b>\n"
           "<b>Edit → Preferences</b> sets decimal places, thousands separators, angle units, and more. Also choose which modes appear in the Mode menu."),
     )),
@@ -242,6 +245,9 @@ HELP_PAGES = (
           "  • <b>Delete Saved History:</b> Clears the history and deletes the file."),
         section_heading(_("Modes")),
         _("Switch off unused modes to hide them from the Mode menu. At least one mode stays on."),
+        section_heading(_("Menu")),
+        _("  • <b>Buffet menu:</b> Every menu at once, from a button in the title bar (default on). Switched off, xl-Calculator has a menu bar instead.\n"
+          "  • <b>Menu layout</b>, <b>Menus per row</b>, <b>Row width</b>, <b>When there's no room below the title bar</b>, <b>Rows</b>, and <b>Keyboard shortcuts:</b> How the Buffet menu lays out its menus. Each choice is explained under its name. They start as two menus per row, as wide as the window, stacked up, with the shortcuts next to the items."),
     )),
     (N_("Keyboard"), None, SHORTCUTS_PAGE),     # drawn with key caps, like Xed's shortcuts window
 )

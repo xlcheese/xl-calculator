@@ -130,7 +130,9 @@ class ScientificMode:
         box.set_halign(Gtk.Align.CENTER)
         box.pack_start(Gtk.Label(label="f(x)"), False, False, 0)
         box.pack_start(Gtk.Image.new_from_icon_name("pan-down-symbolic", Gtk.IconSize.BUTTON), False, False, 0)
-        button.add(box)
+        key = Gtk.Box()         # fills the key, so the keypad's tint behind it does too (see apply_custom_styles)
+        key.set_center_widget(box)
+        button.add(key)
         button.set_popup(menu)
         return button
 

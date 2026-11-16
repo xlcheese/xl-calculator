@@ -3,8 +3,9 @@
 # xl-Calculator
 
 A calculator for Linux Mint and the Cinnamon desktop, made in the style of the
-Mint X-Apps: a classic menubar, the system theme, and nothing that looks out of
-place next to Xed or Xviewer.
+Mint X-Apps: the system theme, and nothing that looks out of place next to Xed
+or Xviewer. Its menus are a [Buffet menu](https://github.com/xlcheese/buffet-menu):
+every menu at once, from one button in the title bar.
 
 ![Scientific mode](screenshots/scientific.png)
 
@@ -25,6 +26,15 @@ can have up to 50 decimal places.
 
 Press **F1** in the app for the documentation, and **Ctrl+F1** for the keyboard
 shortcuts.
+
+## The Buffet menu
+
+The button at the right of the title bar (or **F10**) shows every menu at once,
+side by side, with the keyboard shortcuts next to the items. **Alt** and a menu's
+underlined letter opens it at that menu: Alt+M for Mode. **Edit → Preferences →
+Menu** sets how it lays out its menus, or switches back to a classic menu bar.
+
+![The Buffet menu](screenshots/buffet-menu.png)
 
 | Basic | Financial | Programmer |
 |---|---|---|
@@ -73,8 +83,11 @@ The program is in `usr/lib/xl-calculator/`, one file for each part:
 | `financial.py` | loans and savings, cash flows, amortization, and depreciation |
 | `programmer.py` | bases, word sizes, and bitwise operators |
 | `converter.py` | the Unit Converter and its exact conversion factors |
+| `currency.py` | the Currency Converter: downloading, keeping, and refreshing the exchange rates |
 | `engine.py` | the arithmetic behind every mode, and how answers are written |
 | `history.py` | the history above the display, and the saved history file |
+| `menus.py` | the Buffet menu and its header bar, made from the menu bar's items, or the menu bar |
+| `buffet.py` | the Buffet menu itself, copied from [Buffet Menu](https://github.com/xlcheese/buffet-menu) |
 | `printing.py` | printing the history as a calculator tape, and Print Preview |
 | `preferences.py` | the Preferences window, and the settings it changes |
 | `documentation.py` | the Documentation pages and the keyboard shortcuts |
