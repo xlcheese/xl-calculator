@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xl-Calculator 0.9.2\n"
 "Report-Msgid-Bugs-To: https://github.com/xlcheese/xl-calculator/issues\n"
-"POT-Creation-Date: 2026-11-06 16:38+0000\n"
+"POT-Creation-Date: 2026-11-16 06:12+0000\n"
 "PO-Revision-Date: 2026-10-31 04:29+0000\n"
 "Last-Translator: Draft by Claude (needs native review)\n"
 "Language-Team: Spanish\n"
@@ -37,43 +37,212 @@ msgstr "Entrada no válida"
 msgid "Calculation Error"
 msgstr "Error de cálculo"
 
+#: usr/lib/xl-calculator/buffet.py:251
+#, python-brace-format
+msgid "Shortcut: {shortcut}"
+msgstr "Atajo: {shortcut}"
+
+#: usr/lib/xl-calculator/buffet.py:395
+msgid "Close the menu"
+msgstr "Cerrar el menú"
+
+#: usr/lib/xl-calculator/buffet.py:1003
+#: usr/lib/xl-calculator/documentation.py:228
+#: usr/lib/xl-calculator/window.py:202
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: usr/lib/xl-calculator/buffet.py:1006
+msgid "_Close"
+msgstr "_Cerrar"
+
+#: usr/lib/xl-calculator/buffet.py:1022
+#: usr/lib/xl-calculator/preferences.py:232
+msgid "menus per row"
+msgstr "menús por fila"
+
+#: usr/lib/xl-calculator/buffet.py:1023 usr/lib/xl-calculator/menus.py:36
+msgid "Menu layout"
+msgstr "Disposición de los menús"
+
+#: usr/lib/xl-calculator/buffet.py:1024 usr/lib/xl-calculator/menus.py:37
+msgid "One row, then _equal rows"
+msgstr "Una fila, luego filas _iguales"
+
+#: usr/lib/xl-calculator/buffet.py:1025 usr/lib/xl-calculator/menus.py:38
+msgid "If one row doesn't fit, as few rows as fit, with as many menus in each"
+msgstr ""
+"Si no cabe una fila, las menos filas que quepan, con tantos menús en cada una"
+
+#: usr/lib/xl-calculator/buffet.py:1026 usr/lib/xl-calculator/menus.py:39
+msgid "One row, then fi_ll each row"
+msgstr "Una fila, luego _llenar cada fila"
+
+#: usr/lib/xl-calculator/buffet.py:1027 usr/lib/xl-calculator/menus.py:40
+msgid "If one row doesn't fit, as many menus in each row as fit"
+msgstr "Si no cabe una fila, tantos menús en cada fila como quepan"
+
+#: usr/lib/xl-calculator/buffet.py:1028 usr/lib/xl-calculator/menus.py:41
+msgid "T_wo rows"
+msgstr "_Dos filas"
+
+#: usr/lib/xl-calculator/buffet.py:1028 usr/lib/xl-calculator/menus.py:41
+msgid "More rows only if two don't fit"
+msgstr "Más filas solo si no caben dos"
+
+#: usr/lib/xl-calculator/buffet.py:1029 usr/lib/xl-calculator/menus.py:42
+msgid "_Fixed:"
+msgstr "_Fijo:"
+
+#: usr/lib/xl-calculator/buffet.py:1029 usr/lib/xl-calculator/menus.py:42
+msgid "Always the same number of menus in each row"
+msgstr "Siempre el mismo número de menús en cada fila"
+
+#: usr/lib/xl-calculator/buffet.py:1031 usr/lib/xl-calculator/menus.py:43
+msgid "Row width"
+msgstr "Ancho de las filas"
+
+#: usr/lib/xl-calculator/buffet.py:1032 usr/lib/xl-calculator/menus.py:44
+msgid "The application's win_dow"
+msgstr "La _ventana de la aplicación"
+
+#: usr/lib/xl-calculator/buffet.py:1033 usr/lib/xl-calculator/menus.py:44
+msgid "The menu stays inside the window when it can"
+msgstr "El menú queda dentro de la ventana cuando puede"
+
+#: usr/lib/xl-calculator/buffet.py:1034 usr/lib/xl-calculator/menus.py:45
+msgid "The scree_n"
+msgstr "La _pantalla"
+
+#: usr/lib/xl-calculator/buffet.py:1034 usr/lib/xl-calculator/menus.py:45
+msgid "Wider rows, so fewer of them"
+msgstr "Filas más anchas, así que menos filas"
+
+#: usr/lib/xl-calculator/buffet.py:1036 usr/lib/xl-calculator/menus.py:46
+msgid "When there's no room below the title bar"
+msgstr "Cuando no hay espacio bajo la barra de título"
+
+#: usr/lib/xl-calculator/buffet.py:1037 usr/lib/xl-calculator/menus.py:47
+msgid "Move the _menu up"
+msgstr "_Subir el menú"
+
+#: usr/lib/xl-calculator/buffet.py:1037 usr/lib/xl-calculator/menus.py:47
+msgid ""
+"Above the title bar, or over it,\n"
+"with the rows as they are"
+msgstr ""
+"Encima de la barra de título, o sobre ella,\n"
+"con las filas como están"
+
+#: usr/lib/xl-calculator/buffet.py:1038 usr/lib/xl-calculator/menus.py:48
+msgid "Change the _rows to fit"
+msgstr "Ca_mbiar las filas para que quepa"
+
+#: usr/lib/xl-calculator/buffet.py:1038 usr/lib/xl-calculator/menus.py:48
+msgid ""
+"Below the title bar,\n"
+"with fewer, wider rows"
+msgstr ""
+"Bajo la barra de título,\n"
+"con menos filas, más anchas"
+
+#: usr/lib/xl-calculator/buffet.py:1040 usr/lib/xl-calculator/menus.py:49
+msgid "Rows"
+msgstr "Filas"
+
+#: usr/lib/xl-calculator/buffet.py:1041 usr/lib/xl-calculator/menus.py:50
+msgid "Lined _up"
+msgstr "_Alineadas"
+
+#: usr/lib/xl-calculator/buffet.py:1041 usr/lib/xl-calculator/menus.py:50
+msgid ""
+"Each row starts at the same height,\n"
+"with a line between rows"
+msgstr ""
+"Cada fila empieza a la misma altura,\n"
+"con una línea entre las filas"
+
+#: usr/lib/xl-calculator/buffet.py:1042 usr/lib/xl-calculator/menus.py:51
+msgid "Stac_ked up"
+msgstr "_Unas sobre otras"
+
+#: usr/lib/xl-calculator/buffet.py:1042 usr/lib/xl-calculator/menus.py:51
+msgid ""
+"Each menu right under the one above it:\n"
+"shorter, but busier"
+msgstr ""
+"Cada menú justo debajo del de arriba:\n"
+"más bajo, pero más recargado"
+
+#: usr/lib/xl-calculator/buffet.py:1044 usr/lib/xl-calculator/menus.py:52
+msgid "Keyboard shortcuts"
+msgstr "Atajos de teclado"
+
+#: usr/lib/xl-calculator/buffet.py:1045 usr/lib/xl-calculator/menus.py:53
+msgid "_Show next to each item"
+msgstr "Mostrar junto a cada _elemento"
+
+#: usr/lib/xl-calculator/buffet.py:1045 usr/lib/xl-calculator/menus.py:53
+msgid "As in other menus"
+msgstr "Como en otros menús"
+
+#: usr/lib/xl-calculator/buffet.py:1046 usr/lib/xl-calculator/menus.py:54
+msgid "Show in a _tooltip"
+msgstr "Mostrar en una descripción emergen_te"
+
+#: usr/lib/xl-calculator/buffet.py:1047 usr/lib/xl-calculator/menus.py:54
+msgid "Narrower menus: point at an item to see its shortcut"
+msgstr "Menús más estrechos: señale un elemento para ver su atajo"
+
+#: usr/lib/xl-calculator/buffet.py:1048 usr/lib/xl-calculator/menus.py:55
+msgid "_Hide"
+msgstr "_Ocultar"
+
+#: usr/lib/xl-calculator/buffet.py:1048 usr/lib/xl-calculator/menus.py:55
+msgid "The narrowest menus"
+msgstr "Los menús más estrechos"
+
+#: usr/lib/xl-calculator/buffet.py:1065
+msgid "Chosen the first time this menu opens, from how many menus there are"
+msgstr "Se elige la primera vez que se abre este menú, según cuántos menús hay"
+
 #: usr/lib/xl-calculator/config.py:76
 msgid "Developed with the help of Claude, an AI assistant by Anthropic"
 msgstr "Desarrollado con la ayuda de Claude, un asistente de IA de Anthropic"
 
-#: usr/lib/xl-calculator/config.py:90 usr/lib/xl-calculator/documentation.py:42
-#: usr/lib/xl-calculator/documentation.py:85
-#: usr/lib/xl-calculator/window.py:207
+#: usr/lib/xl-calculator/config.py:90 usr/lib/xl-calculator/documentation.py:43
+#: usr/lib/xl-calculator/documentation.py:88
+#: usr/lib/xl-calculator/window.py:210
 msgid "Basic"
 msgstr "Básico"
 
-#: usr/lib/xl-calculator/config.py:90 usr/lib/xl-calculator/documentation.py:43
-#: usr/lib/xl-calculator/documentation.py:104
-#: usr/lib/xl-calculator/preferences.py:152 usr/lib/xl-calculator/window.py:212
+#: usr/lib/xl-calculator/config.py:90 usr/lib/xl-calculator/documentation.py:44
+#: usr/lib/xl-calculator/documentation.py:107
+#: usr/lib/xl-calculator/preferences.py:155 usr/lib/xl-calculator/window.py:215
 msgid "Scientific"
 msgstr "Científico"
 
 #: usr/lib/xl-calculator/config.py:90
-#: usr/lib/xl-calculator/documentation.py:131
-#: usr/lib/xl-calculator/window.py:217
+#: usr/lib/xl-calculator/documentation.py:134
+#: usr/lib/xl-calculator/window.py:220
 msgid "Financial"
 msgstr "Financiero"
 
-#: usr/lib/xl-calculator/config.py:90 usr/lib/xl-calculator/documentation.py:45
-#: usr/lib/xl-calculator/documentation.py:163
-#: usr/lib/xl-calculator/preferences.py:157 usr/lib/xl-calculator/window.py:222
+#: usr/lib/xl-calculator/config.py:90 usr/lib/xl-calculator/documentation.py:46
+#: usr/lib/xl-calculator/documentation.py:166
+#: usr/lib/xl-calculator/preferences.py:160 usr/lib/xl-calculator/window.py:225
 msgid "Programmer"
 msgstr "Programador"
 
 #: usr/lib/xl-calculator/config.py:90
-#: usr/lib/xl-calculator/documentation.py:191
-#: usr/lib/xl-calculator/window.py:227
+#: usr/lib/xl-calculator/documentation.py:194
+#: usr/lib/xl-calculator/window.py:230
 msgid "Unit Converter"
 msgstr "Conversor de unidades"
 
 #: usr/lib/xl-calculator/config.py:91
-#: usr/lib/xl-calculator/documentation.py:207
-#: usr/lib/xl-calculator/preferences.py:165 usr/lib/xl-calculator/window.py:232
+#: usr/lib/xl-calculator/documentation.py:210
+#: usr/lib/xl-calculator/preferences.py:168 usr/lib/xl-calculator/window.py:235
 msgid "Currency Converter"
 msgstr "Conversor de divisas"
 
@@ -532,7 +701,7 @@ msgid "Formula:  {formula}"
 msgstr "Fórmula:  {formula}"
 
 #: usr/lib/xl-calculator/converter.py:299
-#: usr/lib/xl-calculator/programmer.py:221 usr/lib/xl-calculator/window.py:1088
+#: usr/lib/xl-calculator/programmer.py:221 usr/lib/xl-calculator/window.py:1117
 msgid "Can't paste that"
 msgstr "No se puede pegar eso"
 
@@ -558,7 +727,7 @@ msgstr ""
 msgid "Download today's rates from the European Central Bank"
 msgstr "Descargar los tipos de hoy del Banco Central Europeo"
 
-#: usr/lib/xl-calculator/currency.py:271 usr/lib/xl-calculator/window.py:45
+#: usr/lib/xl-calculator/currency.py:271 usr/lib/xl-calculator/window.py:46
 msgid "Refresh Rates"
 msgstr "Actualizar tipos"
 
@@ -633,142 +802,145 @@ msgid "Windows"
 msgstr "Ventanas"
 
 #: usr/lib/xl-calculator/documentation.py:22
+msgid "Open the menu"
+msgstr "Abrir el menú"
+
+#: usr/lib/xl-calculator/documentation.py:23
 msgid "Open a new window"
 msgstr "Abrir una ventana nueva"
 
-#: usr/lib/xl-calculator/documentation.py:23
+#: usr/lib/xl-calculator/documentation.py:24
 msgid "Close the window"
 msgstr "Cerrar la ventana"
 
-#: usr/lib/xl-calculator/documentation.py:24
+#: usr/lib/xl-calculator/documentation.py:25
 msgid "Quit xl-Calculator"
 msgstr "Salir de xl-Calculator"
 
-#: usr/lib/xl-calculator/documentation.py:25
-#: usr/lib/xl-calculator/documentation.py:243
-#: usr/lib/xl-calculator/preferences.py:49
+#: usr/lib/xl-calculator/documentation.py:26
+#: usr/lib/xl-calculator/documentation.py:246
+#: usr/lib/xl-calculator/preferences.py:51
 msgid "Modes"
 msgstr "Modos"
 
-#: usr/lib/xl-calculator/documentation.py:25
+#: usr/lib/xl-calculator/documentation.py:26
 msgid "Switch to Basic"
 msgstr "Cambiar a Básico"
 
-#: usr/lib/xl-calculator/documentation.py:26
+#: usr/lib/xl-calculator/documentation.py:27
 msgid "Switch to Scientific"
 msgstr "Cambiar a Científico"
 
-#: usr/lib/xl-calculator/documentation.py:27
+#: usr/lib/xl-calculator/documentation.py:28
 msgid "Switch to Financial"
 msgstr "Cambiar a Financiero"
 
-#: usr/lib/xl-calculator/documentation.py:28
+#: usr/lib/xl-calculator/documentation.py:29
 msgid "Switch to Programmer"
 msgstr "Cambiar a Programador"
 
-#: usr/lib/xl-calculator/documentation.py:29
+#: usr/lib/xl-calculator/documentation.py:30
 msgid "Switch to Unit Converter"
 msgstr "Cambiar a Conversor de unidades"
 
-#: usr/lib/xl-calculator/documentation.py:30
+#: usr/lib/xl-calculator/documentation.py:31
 msgid "Switch to Currency Converter"
 msgstr "Cambiar a Conversor de divisas"
 
-#: usr/lib/xl-calculator/documentation.py:31
-#: usr/lib/xl-calculator/window.py:279
+#: usr/lib/xl-calculator/documentation.py:32
 msgid "Help"
 msgstr "Ayuda"
 
-#: usr/lib/xl-calculator/documentation.py:31
+#: usr/lib/xl-calculator/documentation.py:32
 msgid "Open the documentation"
 msgstr "Abrir la documentación"
 
-#: usr/lib/xl-calculator/documentation.py:32
+#: usr/lib/xl-calculator/documentation.py:33
 msgid "Show the keyboard shortcuts"
 msgstr "Mostrar los atajos de teclado"
 
-#: usr/lib/xl-calculator/documentation.py:33
+#: usr/lib/xl-calculator/documentation.py:34
 msgid "Printing"
 msgstr "Impresión"
 
-#: usr/lib/xl-calculator/documentation.py:33
+#: usr/lib/xl-calculator/documentation.py:34
 msgid "Print the history"
 msgstr "Imprimir el historial"
 
-#: usr/lib/xl-calculator/documentation.py:34
+#: usr/lib/xl-calculator/documentation.py:35
 msgid "Preview the printout"
 msgstr "Vista previa de la impresión"
 
-#: usr/lib/xl-calculator/documentation.py:35
+#: usr/lib/xl-calculator/documentation.py:36
 msgid "Copy and Paste"
 msgstr "Copiar y pegar"
 
-#: usr/lib/xl-calculator/documentation.py:35
+#: usr/lib/xl-calculator/documentation.py:36
 msgid "Copy the display, or the highlighted part"
 msgstr "Copiar la pantalla o la parte resaltada"
 
-#: usr/lib/xl-calculator/documentation.py:36
+#: usr/lib/xl-calculator/documentation.py:37
 msgid "Cut the highlighted part"
 msgstr "Cortar la parte resaltada"
 
-#: usr/lib/xl-calculator/documentation.py:37
+#: usr/lib/xl-calculator/documentation.py:38
 msgid "Paste a number or calculation"
 msgstr "Pegar un número o un cálculo"
 
-#: usr/lib/xl-calculator/documentation.py:38
+#: usr/lib/xl-calculator/documentation.py:39
 msgid "Highlight everything in the display"
 msgstr "Resaltar todo el contenido de la pantalla"
 
-#: usr/lib/xl-calculator/documentation.py:39
+#: usr/lib/xl-calculator/documentation.py:40
 msgid "Text Size"
 msgstr "Tamaño del texto"
 
-#: usr/lib/xl-calculator/documentation.py:39
+#: usr/lib/xl-calculator/documentation.py:40
 msgid "Larger text"
 msgstr "Texto más grande"
 
-#: usr/lib/xl-calculator/documentation.py:40
+#: usr/lib/xl-calculator/documentation.py:41
 msgid "Smaller text"
 msgstr "Texto más pequeño"
 
-#: usr/lib/xl-calculator/documentation.py:41
+#: usr/lib/xl-calculator/documentation.py:42
 msgid "Normal text size"
 msgstr "Tamaño de texto normal"
 
-#: usr/lib/xl-calculator/documentation.py:42
+#: usr/lib/xl-calculator/documentation.py:43
 msgid "Square root (√)"
 msgstr "Raíz cuadrada (√)"
 
-#: usr/lib/xl-calculator/documentation.py:43
+#: usr/lib/xl-calculator/documentation.py:44
 msgid "Square root (²√x)"
 msgstr "Raíz cuadrada (²√x)"
 
-#: usr/lib/xl-calculator/documentation.py:44
+#: usr/lib/xl-calculator/documentation.py:45
 msgid "Reciprocal (1/x)"
 msgstr "Recíproco (1/x)"
 
-#: usr/lib/xl-calculator/documentation.py:45
+#: usr/lib/xl-calculator/documentation.py:46
 msgid "Switch to HEX"
 msgstr "Cambiar a HEX"
 
-#: usr/lib/xl-calculator/documentation.py:46
+#: usr/lib/xl-calculator/documentation.py:47
 msgid "Switch to DEC"
 msgstr "Cambiar a DEC"
 
-#: usr/lib/xl-calculator/documentation.py:47
+#: usr/lib/xl-calculator/documentation.py:48
 msgid "Switch to OCT"
 msgstr "Cambiar a OCT"
 
-#: usr/lib/xl-calculator/documentation.py:48
+#: usr/lib/xl-calculator/documentation.py:49
 msgid "Switch to BIN"
 msgstr "Cambiar a BIN"
 
-#: usr/lib/xl-calculator/documentation.py:63
+#: usr/lib/xl-calculator/documentation.py:64
 msgid "Getting Started"
 msgstr "Primeros pasos"
 
 #. Translators: the Documentation pages are Pango markup: keep <b>…</b> and &amp; &lt; &gt; as they are
-#: usr/lib/xl-calculator/documentation.py:65
+#: usr/lib/xl-calculator/documentation.py:66
 msgid ""
 "xl-Calculator has six modes. Pick one from the <b>Mode</b> menu:\n"
 "  • <b>Basic</b> for everyday sums.\n"
@@ -793,7 +965,7 @@ msgstr ""
 "  • <b>Conversor de divisas</b> para los tipos de cambio del Banco Central "
 "Europeo."
 
-#: usr/lib/xl-calculator/documentation.py:72
+#: usr/lib/xl-calculator/documentation.py:73
 msgid ""
 "<b>Typing</b>\n"
 "Click the buttons or use the keyboard. Click in the display or use the arrow "
@@ -806,7 +978,7 @@ msgstr ""
 "funcionan en la posición del cursor. El texto resaltado se sustituye por lo "
 "que escriba."
 
-#: usr/lib/xl-calculator/documentation.py:74
+#: usr/lib/xl-calculator/documentation.py:75
 msgid ""
 "<b>The history</b>\n"
 "Every answer is added to the history above the display. Click an answer to "
@@ -823,7 +995,7 @@ msgstr ""
 "guarda sobre la marcha; en Preferencias puede hacer que vuelva a mostrarse "
 "la próxima vez que abra xl-Calculator."
 
-#: usr/lib/xl-calculator/documentation.py:76
+#: usr/lib/xl-calculator/documentation.py:77
 msgid ""
 "<b>Long numbers</b>\n"
 "An answer too wide for the window is shown in scientific notation, like "
@@ -835,7 +1007,7 @@ msgstr ""
 "científica, como 3.7×10²⁰. Ensanche la ventana para verlo completo. Copiar y "
 "el historial siempre conservan el número completo."
 
-#: usr/lib/xl-calculator/documentation.py:78
+#: usr/lib/xl-calculator/documentation.py:79
 msgid ""
 "<b>Copy and paste</b>\n"
 "<b>Edit → Copy</b> copies the display. <b>Edit → Paste</b> pastes a number "
@@ -845,7 +1017,7 @@ msgstr ""
 "<b>Editar → Copiar</b> copia la pantalla. <b>Editar → Pegar</b> pega un "
 "número o un cálculo sencillo."
 
-#: usr/lib/xl-calculator/documentation.py:80
+#: usr/lib/xl-calculator/documentation.py:81
 msgid ""
 "<b>Window size and text size</b>\n"
 "Stretch the history taller and every mode keeps that height. Each mode "
@@ -860,7 +1032,21 @@ msgstr ""
 "texto, y <b>Ver → Restablecer vista</b> devuelve la ventana a su tamaño "
 "original."
 
-#: usr/lib/xl-calculator/documentation.py:82
+#: usr/lib/xl-calculator/documentation.py:83
+msgid ""
+"<b>The menu</b>\n"
+"The button at the right of the title bar opens the Buffet menu: every menu "
+"at once, side by side. F10 opens it too, and Alt with a menu's underlined "
+"letter opens it at that menu, such as Alt+M for Mode. Preferences → Menu "
+"changes how it looks, or brings back a menu bar."
+msgstr ""
+"<b>El menú</b>\n"
+"El botón a la derecha de la barra de título abre el menú Buffet: todos los "
+"menús a la vez, uno al lado del otro. F10 también lo abre, y Alt con la "
+"letra subrayada de un menú lo abre en ese menú, como Alt+M para Modo. "
+"Preferencias → Menú cambia su aspecto, o vuelve a poner una barra de menús."
+
+#: usr/lib/xl-calculator/documentation.py:85
 msgid ""
 "<b>Preferences</b>\n"
 "<b>Edit → Preferences</b> sets decimal places, thousands separators, angle "
@@ -871,11 +1057,11 @@ msgstr ""
 "miles, las unidades de ángulo y más. También permite elegir qué modos "
 "aparecen en el menú Modo."
 
-#: usr/lib/xl-calculator/documentation.py:86
+#: usr/lib/xl-calculator/documentation.py:89
 msgid "The everyday keypad. Every other mode builds on it."
 msgstr "El teclado de todos los días. Todos los demás modos parten de él."
 
-#: usr/lib/xl-calculator/documentation.py:87
+#: usr/lib/xl-calculator/documentation.py:90
 msgid ""
 "  <b>Clear</b>  start again\n"
 "  <b>√</b>  square root of the number you just typed, or of the answer: 9 √ "
@@ -895,7 +1081,7 @@ msgstr ""
 "  <b>⌫</b>  en el extremo derecho de la pantalla (y en el teclado de los "
 "demás modos): borra el carácter anterior al cursor"
 
-#: usr/lib/xl-calculator/documentation.py:93
+#: usr/lib/xl-calculator/documentation.py:96
 msgid ""
 "Multiplication and division are done before addition and subtraction, so 2 + "
 "3 × 4 = 14."
@@ -903,7 +1089,7 @@ msgstr ""
 "La multiplicación y la división se hacen antes que la suma y la resta, así "
 "que 2 + 3 × 4 = 14."
 
-#: usr/lib/xl-calculator/documentation.py:94
+#: usr/lib/xl-calculator/documentation.py:97
 msgid ""
 "<b>Typing with the keyboard</b>\n"
 "  <b>0–9</b>, <b>.</b>  numbers\n"
@@ -925,7 +1111,7 @@ msgstr ""
 "  <b>← →  Inicio  Fin</b>  mueven el cursor;  mantenga <b>Mayús</b> para "
 "resaltar"
 
-#: usr/lib/xl-calculator/documentation.py:102
+#: usr/lib/xl-calculator/documentation.py:105
 msgid ""
 "The other modes use these keys too; each mode's page lists what it adds or "
 "changes. For the Ctrl shortcuts, see the Keyboard page."
@@ -933,11 +1119,11 @@ msgstr ""
 "Los demás modos también usan estas teclas; la página de cada modo indica lo "
 "que añade o cambia. Para los atajos con Ctrl, vea la página Teclado."
 
-#: usr/lib/xl-calculator/documentation.py:105
+#: usr/lib/xl-calculator/documentation.py:108
 msgid "Everything in Basic, plus:"
 msgstr "Todo lo de Básico, más:"
 
-#: usr/lib/xl-calculator/documentation.py:106
+#: usr/lib/xl-calculator/documentation.py:109
 msgid ""
 "<b>Powers and roots</b>\n"
 "  <b>x²</b>, <b>x³</b>, <b>xʸ</b>  powers;  <b>eˣ</b>, <b>10ˣ</b>  powers of "
@@ -953,7 +1139,7 @@ msgstr ""
 "<b>1/x</b>  recíproco\n"
 "  <b>EE</b>  por diez elevado a: 3 EE 5 = 300000"
 
-#: usr/lib/xl-calculator/documentation.py:110
+#: usr/lib/xl-calculator/documentation.py:113
 msgid ""
 "<b>Trigonometry</b>\n"
 "  <b>sin</b>, <b>cos</b>, <b>tan</b>, and the hyperbolic <b>sinh</b>, "
@@ -969,7 +1155,7 @@ msgstr ""
 "  <b>Rad</b> / <b>Deg</b>  alterna entre radianes y grados. Se usan grados "
 "hasta que cambie."
 
-#: usr/lib/xl-calculator/documentation.py:114
+#: usr/lib/xl-calculator/documentation.py:117
 msgid ""
 "<b>Logarithms and constants</b>\n"
 "  <b>ln</b>  natural logarithm;  <b>log₁₀</b>  base-10 logarithm\n"
@@ -983,7 +1169,7 @@ msgstr ""
 "entre 0 y 1\n"
 "  <b>x!</b>  factorial: 5! = 120"
 
-#: usr/lib/xl-calculator/documentation.py:118
+#: usr/lib/xl-calculator/documentation.py:121
 msgid ""
 "<b>More functions</b>\n"
 "  <b>|x|</b>  absolute value: |−5| = 5\n"
@@ -1001,7 +1187,7 @@ msgstr ""
 "  <b>mod</b>  el resto: 17 mod 5 = 2\n"
 "  <b>f(x)</b>  un menú con más funciones, cada una con una breve explicación"
 
-#: usr/lib/xl-calculator/documentation.py:125
+#: usr/lib/xl-calculator/documentation.py:128
 msgid ""
 "<b>Memory</b>\n"
 "  <b>M+</b> adds the display to the memory, <b>M−</b> subtracts it, <b>MR</"
@@ -1011,7 +1197,7 @@ msgstr ""
 "  <b>M+</b> suma la pantalla a la memoria, <b>M−</b> la resta, <b>MR</b> la "
 "recupera y <b>MC</b> la borra."
 
-#: usr/lib/xl-calculator/documentation.py:127
+#: usr/lib/xl-calculator/documentation.py:130
 msgid ""
 "<b>Keyboard</b>\n"
 "All of Basic's keys work here too, plus:\n"
@@ -1023,13 +1209,13 @@ msgstr ""
 "  <b>^</b>  potencia;  <b>( )</b>  paréntesis;  <b>!</b>  factorial;  <b>e</"
 "b>  la constante e;  <b>p</b>  π"
 
-#: usr/lib/xl-calculator/documentation.py:132
+#: usr/lib/xl-calculator/documentation.py:135
 msgid "The lines under the display always show the values stored so far."
 msgstr ""
 "Las líneas bajo la pantalla muestran siempre los valores guardados hasta el "
 "momento."
 
-#: usr/lib/xl-calculator/documentation.py:133
+#: usr/lib/xl-calculator/documentation.py:136
 msgid ""
 "<b>Loans and savings (time value of money)</b>\n"
 "The five keys <b>N</b>, <b>I/Y</b>, <b>PV</b>, <b>PMT</b>, and <b>FV</b> are "
@@ -1061,7 +1247,7 @@ msgstr ""
 "  <b>BGN</b>  alterna entre pagos al final de cada período (END) y al "
 "principio (BGN)"
 
-#: usr/lib/xl-calculator/documentation.py:141
+#: usr/lib/xl-calculator/documentation.py:144
 msgid ""
 "<b>Cash flows</b>\n"
 "  <b>CFj</b>  type an amount and press CFj; the first one is the starting "
@@ -1081,7 +1267,7 @@ msgstr ""
 "obtener el valor actual neto\n"
 "  <b>IRR</b>  la tasa interna de retorno"
 
-#: usr/lib/xl-calculator/documentation.py:146
+#: usr/lib/xl-calculator/documentation.py:149
 msgid ""
 "<b>Loan schedule (amortization)</b>\n"
 "With the loan stored, type a payment number and press <b>P1</b>, then "
@@ -1095,7 +1281,7 @@ msgstr ""
 "  <b>BAL</b>  el saldo pendiente tras el pago P2\n"
 "  <b>PRN</b>, <b>INT</b>  el capital y los intereses pagados de P1 a P2"
 
-#: usr/lib/xl-calculator/documentation.py:150
+#: usr/lib/xl-calculator/documentation.py:153
 msgid ""
 "<b>Depreciation</b>\n"
 "Store the asset's life in years as N, its cost as PV, and its salvage value "
@@ -1109,7 +1295,7 @@ msgstr ""
 "(suma de los dígitos de los años) o <b>DB</b> (saldo decreciente; guarde el "
 "porcentaje de decrecimiento, por ejemplo 200, como I/Y)."
 
-#: usr/lib/xl-calculator/documentation.py:152
+#: usr/lib/xl-calculator/documentation.py:155
 msgid ""
 "<b>Interest rates</b>\n"
 "  <b>EFF</b>  type a nominal yearly rate for the effective yearly rate, "
@@ -1121,7 +1307,7 @@ msgstr ""
 "anual, con capitalización P/Y veces al año\n"
 "  <b>NOM</b>  lo inverso"
 
-#: usr/lib/xl-calculator/documentation.py:155
+#: usr/lib/xl-calculator/documentation.py:158
 msgid ""
 "<b>Business</b>\n"
 "  <b>Mrgn</b>  profit margin: cost Mrgn price, then =. 60 Mrgn 100 = 40 "
@@ -1134,11 +1320,11 @@ msgstr ""
 "  <b>Δ%</b>  variación porcentual: anterior Δ% nuevo, y luego =. 80 Δ% 100 = "
 "25 (por ciento)"
 
-#: usr/lib/xl-calculator/documentation.py:158
+#: usr/lib/xl-calculator/documentation.py:161
 msgid "<b>Clear All</b> erases every stored financial value."
 msgstr "<b>Borrar todo</b> borra todos los valores financieros guardados."
 
-#: usr/lib/xl-calculator/documentation.py:159
+#: usr/lib/xl-calculator/documentation.py:162
 msgid ""
 "Financial answers are worked out to about 15 significant digits, whatever "
 "the decimal places setting: far more than money needs."
@@ -1146,7 +1332,7 @@ msgstr ""
 "Los resultados financieros se calculan con unas 15 cifras significativas, "
 "sea cual sea el ajuste de decimales: mucho más de lo que necesita el dinero."
 
-#: usr/lib/xl-calculator/documentation.py:160
+#: usr/lib/xl-calculator/documentation.py:163
 msgid ""
 "<b>Keyboard</b>\n"
 "All of Basic's keys work here too, plus <b>( )</b> for parentheses. The "
@@ -1157,7 +1343,7 @@ msgstr ""
 "paréntesis. Las teclas financieras (N, PMT, CPT, etc.) solo están en los "
 "botones."
 
-#: usr/lib/xl-calculator/documentation.py:164
+#: usr/lib/xl-calculator/documentation.py:167
 msgid ""
 "Programmer mode works with whole numbers stored in a fixed number of bits, "
 "the way a computer does."
@@ -1165,7 +1351,7 @@ msgstr ""
 "El modo Programador trabaja con números enteros guardados en un número fijo "
 "de bits, como hace un ordenador."
 
-#: usr/lib/xl-calculator/documentation.py:165
+#: usr/lib/xl-calculator/documentation.py:168
 msgid ""
 "<b>Number bases (HEX, DEC, OCT, BIN)</b>\n"
 "Click a base to type and show numbers in it. The number on screen is "
@@ -1177,7 +1363,7 @@ msgstr ""
 "pantalla se convierte al cambiar. Las líneas bajo la pantalla siempre "
 "muestran el valor actual en las cuatro bases."
 
-#: usr/lib/xl-calculator/documentation.py:167
+#: usr/lib/xl-calculator/documentation.py:170
 msgid ""
 "<b>Word size (QWORD / DWORD / WORD / BYTE)</b>\n"
 "The number of bits: 64, 32, 16, or 8. Numbers are signed: in BYTE the range "
@@ -1189,7 +1375,7 @@ msgstr ""
 "rango va de -128 a 127, y 127 + 1 da la vuelta a -128. En HEX, OCT y BIN se "
 "ven los bits tal cual, así que -1 en BYTE aparece como FF."
 
-#: usr/lib/xl-calculator/documentation.py:169
+#: usr/lib/xl-calculator/documentation.py:172
 msgid ""
 "<b>Bitwise operators</b>\n"
 "AND, OR, and XOR compare two numbers bit by bit. NOT flips every bit of the "
@@ -1201,7 +1387,7 @@ msgstr ""
 "del número siguiente. NAND y NOR son NOT AND y NOT OR. Ejemplo: en BIN, 1100 "
 "AND 1010 = 1000."
 
-#: usr/lib/xl-calculator/documentation.py:171
+#: usr/lib/xl-calculator/documentation.py:174
 msgid ""
 "<b>Shifts</b>\n"
 "&lt;&lt; moves bits left (each step doubles the number); &gt;&gt; moves them "
@@ -1211,7 +1397,7 @@ msgstr ""
 "&lt;&lt; desplaza los bits a la izquierda (cada paso duplica el número); &gt;"
 "&gt; los desplaza a la derecha (cada paso lo divide entre dos)."
 
-#: usr/lib/xl-calculator/documentation.py:173
+#: usr/lib/xl-calculator/documentation.py:176
 msgid ""
 "<b>Arithmetic</b>\n"
 "+, −, × work as usual. ÷ drops the remainder and mod gives it: 17 ÷ 5 = 3 "
@@ -1221,7 +1407,7 @@ msgstr ""
 "+, −, × funcionan como siempre. ÷ descarta el resto y mod lo da: 17 ÷ 5 = 3 "
 "y 17 mod 5 = 2."
 
-#: usr/lib/xl-calculator/documentation.py:175
+#: usr/lib/xl-calculator/documentation.py:178
 msgid ""
 "<b>Order of operations (first to last)</b>\n"
 "NOT and minus sign, then × ÷ mod, then + −, then &lt;&lt; &gt;&gt;, then "
@@ -1231,7 +1417,7 @@ msgstr ""
 "NOT y el signo menos, luego × ÷ mod, luego + −, luego &lt;&lt; &gt;&gt;, "
 "luego AND, luego XOR, luego OR. Use paréntesis si tiene dudas."
 
-#: usr/lib/xl-calculator/documentation.py:177
+#: usr/lib/xl-calculator/documentation.py:180
 msgid ""
 "<b>Try it</b>\n"
 "1. Click HEX, type FF, press =. The lines below show DEC 255.\n"
@@ -1243,7 +1429,7 @@ msgstr ""
 "2. Pulse BYTE (cambia el tamaño de palabra) y DEC 255 pasa a ser -1.\n"
 "3. Pulse BIN y pruebe 1100 XOR 1010 =."
 
-#: usr/lib/xl-calculator/documentation.py:182
+#: usr/lib/xl-calculator/documentation.py:185
 #, no-python-format
 msgid ""
 "<b>Keyboard</b>\n"
@@ -1266,11 +1452,11 @@ msgstr ""
 "Dos teclas significan algo distinto aquí: ^ es XOR (no potencia) y % es mod "
 "(no porcentaje)."
 
-#: usr/lib/xl-calculator/documentation.py:189
+#: usr/lib/xl-calculator/documentation.py:192
 msgid "Hover over any button for a short explanation."
 msgstr "Pase el puntero sobre cualquier botón para ver una breve explicación."
 
-#: usr/lib/xl-calculator/documentation.py:192
+#: usr/lib/xl-calculator/documentation.py:195
 msgid ""
 "  1. Pick a category: Angle, Area, Density, Digital Storage, Energy, Length, "
 "Mass, Pressure, Speed, Temperature, Time, or Volume.\n"
@@ -1285,7 +1471,7 @@ msgstr ""
 "convierte mientras escribe; la casilla con el borde verde es la que está "
 "usando."
 
-#: usr/lib/xl-calculator/documentation.py:195
+#: usr/lib/xl-calculator/documentation.py:198
 msgid ""
 "The line under the boxes shows the formula used. ≈ means the number in it is "
 "rounded."
@@ -1293,7 +1479,7 @@ msgstr ""
 "La línea bajo las casillas muestra la fórmula usada. ≈ indica que el número "
 "que contiene está redondeado."
 
-#: usr/lib/xl-calculator/documentation.py:196
+#: usr/lib/xl-calculator/documentation.py:199
 msgid ""
 "  <b>Capture</b> (or Enter)  saves the conversion to the history\n"
 "  <b>±</b>  makes the number negative, for temperatures below zero"
@@ -1301,7 +1487,7 @@ msgstr ""
 "  <b>Capturar</b> (o Intro)  guarda la conversión en el historial\n"
 "  <b>±</b>  hace negativo el número, para temperaturas bajo cero"
 
-#: usr/lib/xl-calculator/documentation.py:198
+#: usr/lib/xl-calculator/documentation.py:201
 msgid ""
 "Click a captured line in the history to bring back that conversion: its "
 "category, both units, and the number."
@@ -1309,7 +1495,7 @@ msgstr ""
 "Haga clic en una línea capturada del historial para recuperar esa "
 "conversión: su categoría, las dos unidades y el número."
 
-#: usr/lib/xl-calculator/documentation.py:199
+#: usr/lib/xl-calculator/documentation.py:202
 msgid ""
 "Conversions use the official definitions (for example, 1 inch is exactly "
 "2.54 cm) and are shown with the decimal places set in Preferences. The "
@@ -1320,7 +1506,7 @@ msgstr ""
 "Preferencias. El conversor recuerda su categoría y las unidades que eligió "
 "en cada una."
 
-#: usr/lib/xl-calculator/documentation.py:200
+#: usr/lib/xl-calculator/documentation.py:203
 msgid ""
 "<b>Keyboard</b>\n"
 "Basic's number, Backspace, Delete, Escape, and cursor keys work here too. "
@@ -1338,7 +1524,7 @@ msgstr ""
 "Las demás teclas de operadores (+ * / %) no hacen nada aquí, porque el "
 "conversor no tiene operadores."
 
-#: usr/lib/xl-calculator/documentation.py:208
+#: usr/lib/xl-calculator/documentation.py:211
 msgid ""
 "Converts between the euro and about 30 other currencies, using the European "
 "Central Bank's reference rates. The bank publishes new rates once a day on "
@@ -1348,7 +1534,7 @@ msgstr ""
 "del Banco Central Europeo. El banco publica tipos nuevos una vez al día, los "
 "días laborables."
 
-#: usr/lib/xl-calculator/documentation.py:209
+#: usr/lib/xl-calculator/documentation.py:212
 msgid ""
 "<b>Getting the rates</b>\n"
 "xl-Calculator doesn't go online until you ask it to. The first time, click "
@@ -1365,7 +1551,7 @@ msgstr ""
 "conexión, con los últimos tipos descargados. La línea bajo las casillas "
 "siempre indica su antigüedad."
 
-#: usr/lib/xl-calculator/documentation.py:211
+#: usr/lib/xl-calculator/documentation.py:214
 msgid ""
 "<b>Converting</b>\n"
 "  1. Pick a currency beside each box. The first time it's US Dollar and "
@@ -1382,7 +1568,7 @@ msgstr ""
 "Cada divisa se muestra con sus propios decimales: dos para dólares y euros, "
 "ninguno para yenes. La línea bajo las casillas da el tipo en ambos sentidos."
 
-#: usr/lib/xl-calculator/documentation.py:215
+#: usr/lib/xl-calculator/documentation.py:218
 msgid ""
 "  <b>⇅ Swap</b>  exchanges the two currencies; the amount in the top box "
 "stays\n"
@@ -1396,7 +1582,7 @@ msgstr ""
 "en la línea más tarde para recuperarla\n"
 "  <b>±</b>  hace negativo el importe"
 
-#: usr/lib/xl-calculator/documentation.py:218
+#: usr/lib/xl-calculator/documentation.py:221
 msgid ""
 "<b>Auto Refresh</b>\n"
 "Click <b>Auto Refresh</b> (or switch on <b>Refresh rates automatically</b> "
@@ -1410,7 +1596,7 @@ msgstr ""
 "principio; en Preferencias puede elegir de 1 a 30 días. Se puede activar una "
 "vez descargados los tipos."
 
-#: usr/lib/xl-calculator/documentation.py:220
+#: usr/lib/xl-calculator/documentation.py:223
 msgid ""
 "Normally rates refresh only while xl-Calculator is open. With <b>Also when "
 "xl-Calculator is closed</b> switched on in Preferences, a small scheduled "
@@ -1427,7 +1613,7 @@ msgstr ""
 "sesión; sin conexión a Internet, lo vuelve a intentar al día siguiente. Al "
 "desactivar cualquiera de los dos ajustes, se detiene."
 
-#: usr/lib/xl-calculator/documentation.py:221
+#: usr/lib/xl-calculator/documentation.py:224
 msgid ""
 "These are reference rates, the middle of the market. A bank or a card "
 "usually charges a little more."
@@ -1435,7 +1621,7 @@ msgstr ""
 "Son tipos de referencia, el punto medio del mercado. Un banco o una tarjeta "
 "suelen cobrar algo más."
 
-#: usr/lib/xl-calculator/documentation.py:222
+#: usr/lib/xl-calculator/documentation.py:225
 msgid ""
 "<b>Keyboard</b>\n"
 "The same keys as the Unit Converter: numbers, Backspace, Delete, Escape, and "
@@ -1447,12 +1633,7 @@ msgstr ""
 "Esc y las teclas de cursor; <b>-</b> hace negativo el importe e <b>Intro</b> "
 "o <b>=</b> captura."
 
-#: usr/lib/xl-calculator/documentation.py:225
-#: usr/lib/xl-calculator/window.py:199
-msgid "Preferences"
-msgstr "Preferencias"
-
-#: usr/lib/xl-calculator/documentation.py:226
+#: usr/lib/xl-calculator/documentation.py:229
 msgid ""
 "Open <b>Edit → Preferences</b>. Changes take effect at once. <b>Reset to "
 "Defaults</b> puts every preference back the way it was the first time; it "
@@ -1462,12 +1643,12 @@ msgstr ""
 "<b>Restablecer valores predeterminados</b> devuelve todas las preferencias a "
 "como estaban la primera vez; no toca el historial guardado."
 
-#: usr/lib/xl-calculator/documentation.py:227
-#: usr/lib/xl-calculator/preferences.py:48
+#: usr/lib/xl-calculator/documentation.py:230
+#: usr/lib/xl-calculator/preferences.py:50
 msgid "General"
 msgstr "General"
 
-#: usr/lib/xl-calculator/documentation.py:228
+#: usr/lib/xl-calculator/documentation.py:231
 msgid ""
 "<b>Numbers</b>\n"
 "  • <b>Decimal places:</b> Rounds answers to 0–50 decimal places (default "
@@ -1497,7 +1678,7 @@ msgstr ""
 "resultados, el historial y la impresión. No se usan al escribir ni en el "
 "modo Programador. Copiar da las cifras sin separadores."
 
-#: usr/lib/xl-calculator/documentation.py:232
+#: usr/lib/xl-calculator/documentation.py:235
 msgid ""
 "<b>Scientific</b>\n"
 "  • <b>Angle units:</b> Sets degrees or radians for sin, cos, and tan. The "
@@ -1507,7 +1688,7 @@ msgstr ""
 "  • <b>Unidades de ángulo:</b> Grados o radianes para sin, cos y tan. El "
 "botón Rad/Deg de Científico cambia el mismo ajuste."
 
-#: usr/lib/xl-calculator/documentation.py:234
+#: usr/lib/xl-calculator/documentation.py:237
 msgid ""
 "<b>Programmer</b>\n"
 "  • <b>Word size</b> and <b>Starting number base:</b> For Programmer mode; "
@@ -1517,7 +1698,7 @@ msgstr ""
 "  • <b>Tamaño de palabra</b> y <b>Base numérica inicial:</b> Para el modo "
 "Programador; sus botones cambian los mismos ajustes."
 
-#: usr/lib/xl-calculator/documentation.py:236
+#: usr/lib/xl-calculator/documentation.py:239
 msgid ""
 "<b>Currency Converter</b>\n"
 "  • <b>Refresh rates automatically:</b> The same setting as the Auto Refresh "
@@ -1536,7 +1717,7 @@ msgstr ""
 "plano, una vez al día, aunque xl-Calculator no esté abierto (desactivado por "
 "defecto)."
 
-#: usr/lib/xl-calculator/documentation.py:240
+#: usr/lib/xl-calculator/documentation.py:243
 msgid ""
 "<b>History</b>\n"
 "  • <b>Keep history after closing:</b> Restores history upon launch. "
@@ -1552,7 +1733,7 @@ msgstr ""
 "  • <b>Eliminar historial guardado:</b> Borra el historial y elimina el "
 "archivo."
 
-#: usr/lib/xl-calculator/documentation.py:244
+#: usr/lib/xl-calculator/documentation.py:247
 msgid ""
 "Switch off unused modes to hide them from the Mode menu. At least one mode "
 "stays on."
@@ -1560,11 +1741,36 @@ msgstr ""
 "Desactive los modos que no use para ocultarlos del menú Modo. Al menos un "
 "modo queda activado."
 
-#: usr/lib/xl-calculator/documentation.py:246
+#: usr/lib/xl-calculator/documentation.py:248
+#: usr/lib/xl-calculator/preferences.py:52
+#: usr/lib/xl-calculator/preferences.py:212
+msgid "Menu"
+msgstr "Menú"
+
+#: usr/lib/xl-calculator/documentation.py:249
+msgid ""
+"  • <b>Buffet menu:</b> Every menu at once, from a button in the title bar "
+"(default on). Switched off, xl-Calculator has a menu bar instead.\n"
+"  • <b>Menu layout</b>, <b>Menus per row</b>, <b>Row width</b>, <b>When "
+"there's no room below the title bar</b>, <b>Rows</b>, and <b>Keyboard "
+"shortcuts:</b> How the Buffet menu lays out its menus. Each choice is "
+"explained under its name. They start as two menus per row, as wide as the "
+"window, stacked up, with the shortcuts next to the items."
+msgstr ""
+"  • <b>Menú Buffet:</b> Todos los menús a la vez, desde un botón en la barra "
+"de título (activado por defecto). Desactivado, xl-Calculator tiene en su "
+"lugar una barra de menús.\n"
+"  • <b>Disposición de los menús</b>, <b>Menús por fila</b>, <b>Ancho de las "
+"filas</b>, <b>Cuando no hay espacio bajo la barra de título</b>, <b>Filas</"
+"b> y <b>Atajos de teclado:</b> Cómo coloca el menú Buffet sus menús. Cada "
+"opción se explica bajo su nombre. Al principio son dos menús por fila, tan "
+"anchos como la ventana, apilados y con los atajos junto a los elementos."
+
+#: usr/lib/xl-calculator/documentation.py:252
 msgid "Keyboard"
 msgstr "Teclado"
 
-#: usr/lib/xl-calculator/documentation.py:254
+#: usr/lib/xl-calculator/documentation.py:260
 msgid "Help - xl-Calculator"
 msgstr "Ayuda - xl-Calculator"
 
@@ -1688,75 +1894,79 @@ msgstr "Haga clic para usar de nuevo este cálculo"
 msgid "Click to use this number"
 msgstr "Haga clic para usar este número"
 
-#: usr/lib/xl-calculator/preferences.py:21
+#: usr/lib/xl-calculator/menus.py:101
+msgid "Menu (F10)"
+msgstr "Menú (F10)"
+
+#: usr/lib/xl-calculator/preferences.py:23
 msgid "Everyday arithmetic"
 msgstr "Aritmética de todos los días"
 
-#: usr/lib/xl-calculator/preferences.py:22
+#: usr/lib/xl-calculator/preferences.py:24
 msgid "Powers, roots, trigonometry, logarithms, and more"
 msgstr "Potencias, raíces, trigonometría, logaritmos y más"
 
-#: usr/lib/xl-calculator/preferences.py:23
+#: usr/lib/xl-calculator/preferences.py:25
 msgid "Loans, savings, cash flows, and depreciation"
 msgstr "Préstamos, ahorros, flujos de caja y depreciación"
 
-#: usr/lib/xl-calculator/preferences.py:24
+#: usr/lib/xl-calculator/preferences.py:26
 msgid "Hexadecimal, binary, and bitwise operations"
 msgstr "Hexadecimal, binario y operaciones bit a bit"
 
-#: usr/lib/xl-calculator/preferences.py:25
+#: usr/lib/xl-calculator/preferences.py:27
 msgid "Lengths, weights, temperatures, and more"
 msgstr "Longitudes, pesos, temperaturas y más"
 
-#: usr/lib/xl-calculator/preferences.py:26
+#: usr/lib/xl-calculator/preferences.py:28
 msgid "Exchange rates from the European Central Bank"
 msgstr "Tipos de cambio del Banco Central Europeo"
 
-#: usr/lib/xl-calculator/preferences.py:30
+#: usr/lib/xl-calculator/preferences.py:32
 msgid "Hexadecimal (HEX)"
 msgstr "Hexadecimal (HEX)"
 
-#: usr/lib/xl-calculator/preferences.py:30
+#: usr/lib/xl-calculator/preferences.py:32
 msgid "Decimal (DEC)"
 msgstr "Decimal (DEC)"
 
-#: usr/lib/xl-calculator/preferences.py:30
+#: usr/lib/xl-calculator/preferences.py:32
 msgid "Octal (OCT)"
 msgstr "Octal (OCT)"
 
-#: usr/lib/xl-calculator/preferences.py:30
+#: usr/lib/xl-calculator/preferences.py:32
 msgid "Binary (BIN)"
 msgstr "Binario (BIN)"
 
-#: usr/lib/xl-calculator/preferences.py:33
+#: usr/lib/xl-calculator/preferences.py:35
 msgid "64-bit (QWORD)"
 msgstr "64 bits (QWORD)"
 
-#: usr/lib/xl-calculator/preferences.py:33
+#: usr/lib/xl-calculator/preferences.py:35
 msgid "32-bit (DWORD)"
 msgstr "32 bits (DWORD)"
 
-#: usr/lib/xl-calculator/preferences.py:33
+#: usr/lib/xl-calculator/preferences.py:35
 msgid "16-bit (WORD)"
 msgstr "16 bits (WORD)"
 
-#: usr/lib/xl-calculator/preferences.py:33
+#: usr/lib/xl-calculator/preferences.py:35
 msgid "8-bit (BYTE)"
 msgstr "8 bits (BYTE)"
 
-#: usr/lib/xl-calculator/preferences.py:41
+#: usr/lib/xl-calculator/preferences.py:43
 msgid "xl-Calculator Preferences"
 msgstr "Preferencias de xl-Calculator"
 
-#: usr/lib/xl-calculator/preferences.py:59 usr/lib/xl-calculator/window.py:283
+#: usr/lib/xl-calculator/preferences.py:62 usr/lib/xl-calculator/window.py:286
 msgid "Documentation"
 msgstr "Documentación"
 
-#: usr/lib/xl-calculator/preferences.py:61
+#: usr/lib/xl-calculator/preferences.py:64
 msgid "Reset to Defaults"
 msgstr "Restablecer valores predeterminados"
 
-#: usr/lib/xl-calculator/preferences.py:62
+#: usr/lib/xl-calculator/preferences.py:65
 msgid ""
 "Put every preference back the way it was the first time. The saved history "
 "is kept."
@@ -1764,96 +1974,96 @@ msgstr ""
 "Devuelve todas las preferencias a como estaban la primera vez. El historial "
 "guardado se conserva."
 
-#: usr/lib/xl-calculator/preferences.py:65
-#: usr/lib/xl-calculator/printing.py:146 usr/lib/xl-calculator/window.py:172
+#: usr/lib/xl-calculator/preferences.py:68
+#: usr/lib/xl-calculator/printing.py:146 usr/lib/xl-calculator/window.py:175
 msgid "Close"
 msgstr "Cerrar"
 
-#: usr/lib/xl-calculator/preferences.py:139
+#: usr/lib/xl-calculator/preferences.py:142
 msgid "Numbers"
 msgstr "Números"
 
-#: usr/lib/xl-calculator/preferences.py:142
+#: usr/lib/xl-calculator/preferences.py:145
 msgid "Decimal places"
 msgstr "Decimales"
 
-#: usr/lib/xl-calculator/preferences.py:143
+#: usr/lib/xl-calculator/preferences.py:146
 msgid "Up to 50 places, using high-precision math (mpmath)."
 msgstr "Hasta 50 decimales, con matemática de alta precisión (mpmath)."
 
-#: usr/lib/xl-calculator/preferences.py:144
+#: usr/lib/xl-calculator/preferences.py:147
 msgid "Up to 15 places. Install python3-mpmath for up to 50."
 msgstr "Hasta 15 decimales. Instale python3-mpmath para tener hasta 50."
 
-#: usr/lib/xl-calculator/preferences.py:147
+#: usr/lib/xl-calculator/preferences.py:150
 msgid "Show all decimal places"
 msgstr "Mostrar todos los decimales"
 
-#: usr/lib/xl-calculator/preferences.py:150
+#: usr/lib/xl-calculator/preferences.py:153
 msgid "Thousands separators"
 msgstr "Separadores de miles"
 
-#: usr/lib/xl-calculator/preferences.py:150
+#: usr/lib/xl-calculator/preferences.py:153
 msgid "1234567 shows as 1,234,567."
 msgstr "1234567 se muestra como 1,234,567."
 
-#: usr/lib/xl-calculator/preferences.py:153
+#: usr/lib/xl-calculator/preferences.py:156
 msgid "Degrees"
 msgstr "Grados"
 
-#: usr/lib/xl-calculator/preferences.py:153
+#: usr/lib/xl-calculator/preferences.py:156
 msgid "Radians"
 msgstr "Radianes"
 
-#: usr/lib/xl-calculator/preferences.py:155
+#: usr/lib/xl-calculator/preferences.py:158
 msgid "Angle units"
 msgstr "Unidades de ángulo"
 
-#: usr/lib/xl-calculator/preferences.py:155
+#: usr/lib/xl-calculator/preferences.py:158
 msgid "Also changed by the Rad/Deg button."
 msgstr "También lo cambia el botón Rad/Deg."
 
-#: usr/lib/xl-calculator/preferences.py:160
+#: usr/lib/xl-calculator/preferences.py:163
 msgid "Word size"
 msgstr "Tamaño de palabra"
 
-#: usr/lib/xl-calculator/preferences.py:160
+#: usr/lib/xl-calculator/preferences.py:163
 msgid "Also changed by the QWORD/DWORD/WORD/BYTE button."
 msgstr "También lo cambia el botón QWORD/DWORD/WORD/BYTE."
 
-#: usr/lib/xl-calculator/preferences.py:163
+#: usr/lib/xl-calculator/preferences.py:166
 msgid "Starting number base"
 msgstr "Base numérica inicial"
 
-#: usr/lib/xl-calculator/preferences.py:163
+#: usr/lib/xl-calculator/preferences.py:166
 msgid "Also changed by the HEX, DEC, OCT, and BIN buttons."
 msgstr "También la cambian los botones HEX, DEC, OCT y BIN."
 
-#: usr/lib/xl-calculator/preferences.py:169
+#: usr/lib/xl-calculator/preferences.py:172
 msgid "Refresh rates automatically"
 msgstr "Actualizar tipos automáticamente"
 
-#: usr/lib/xl-calculator/preferences.py:173
+#: usr/lib/xl-calculator/preferences.py:176
 msgid "Refresh interval in days"
 msgstr "Intervalo de actualización en días"
 
-#: usr/lib/xl-calculator/preferences.py:173
+#: usr/lib/xl-calculator/preferences.py:176
 msgid "Number of days between automatic refreshes."
 msgstr "Número de días entre actualizaciones automáticas."
 
-#: usr/lib/xl-calculator/preferences.py:177
+#: usr/lib/xl-calculator/preferences.py:180
 msgid "Also when xl-Calculator is closed"
 msgstr "También con xl-Calculator cerrado"
 
-#: usr/lib/xl-calculator/preferences.py:179
+#: usr/lib/xl-calculator/preferences.py:182
 msgid "History"
 msgstr "Historial"
 
-#: usr/lib/xl-calculator/preferences.py:182
+#: usr/lib/xl-calculator/preferences.py:185
 msgid "Keep history after closing"
 msgstr "Conservar el historial al cerrar"
 
-#: usr/lib/xl-calculator/preferences.py:183
+#: usr/lib/xl-calculator/preferences.py:186
 msgid ""
 "Show the saved history when xl-Calculator opens. It is always saved in ~/."
 "config/xl-calculator/history.json."
@@ -1861,36 +2071,41 @@ msgstr ""
 "Muestra el historial guardado al abrir xl-Calculator. Siempre se guarda en "
 "~/.config/xl-calculator/history.json."
 
-#: usr/lib/xl-calculator/preferences.py:185
+#: usr/lib/xl-calculator/preferences.py:188
 msgid "Delete Saved History…"
 msgstr "Eliminar historial guardado…"
 
-#: usr/lib/xl-calculator/preferences.py:187
+#: usr/lib/xl-calculator/preferences.py:190
 msgid "Saved history"
 msgstr "Historial guardado"
 
-#: usr/lib/xl-calculator/preferences.py:187
+#: usr/lib/xl-calculator/preferences.py:190
 msgid "Clear the history and delete the saved file."
 msgstr "Borra el historial y elimina el archivo guardado."
 
-#: usr/lib/xl-calculator/preferences.py:192
+#: usr/lib/xl-calculator/preferences.py:195
 msgid "Show in the Mode menu"
 msgstr "Mostrar en el menú Modo"
 
-#: usr/lib/xl-calculator/preferences.py:200
+#: usr/lib/xl-calculator/preferences.py:203
 msgid "At least one mode stays on."
 msgstr "Al menos un modo queda activado."
 
-#: usr/lib/xl-calculator/preferences.py:219
+#: usr/lib/xl-calculator/preferences.py:215
+#: usr/lib/xl-calculator/preferences.py:217
+msgid "Buffet menu"
+msgstr "Menú Buffet"
+
+#: usr/lib/xl-calculator/preferences.py:249
 #, python-brace-format
 msgid "2.5 shows as {example}."
 msgstr "2.5 se muestra como {example}."
 
-#: usr/lib/xl-calculator/preferences.py:220
+#: usr/lib/xl-calculator/preferences.py:250
 msgid "Pads answers with zeros to every decimal place."
 msgstr "Completa los resultados con ceros hasta todos los decimales."
 
-#: usr/lib/xl-calculator/preferences.py:230
+#: usr/lib/xl-calculator/preferences.py:260
 msgid ""
 "The same as the Auto Refresh button. Rates come from the European Central "
 "Bank."
@@ -1898,37 +2113,45 @@ msgstr ""
 "Lo mismo que el botón Autoactualizar. Los tipos vienen del Banco Central "
 "Europeo."
 
-#: usr/lib/xl-calculator/preferences.py:231
+#: usr/lib/xl-calculator/preferences.py:261
 msgid "Click Download Rates in the Currency Converter first."
 msgstr "Pulse primero Descargar tipos en el Conversor de divisas."
 
-#: usr/lib/xl-calculator/preferences.py:238
+#: usr/lib/xl-calculator/preferences.py:268
 msgid "Needs xl-Calculator installed from its package."
 msgstr "Requiere xl-Calculator instalado desde su paquete."
 
-#: usr/lib/xl-calculator/preferences.py:239
+#: usr/lib/xl-calculator/preferences.py:269
 msgid "Rates will refresh in the background even when closed."
 msgstr ""
 "Los tipos se actualizarán en segundo plano incluso con xl-Calculator cerrado."
 
-#: usr/lib/xl-calculator/preferences.py:240
+#: usr/lib/xl-calculator/preferences.py:270
 msgid "Rates will only refresh while xl-Calculator is open."
 msgstr "Los tipos solo se actualizarán con xl-Calculator abierto."
 
-#: usr/lib/xl-calculator/preferences.py:249
+#: usr/lib/xl-calculator/preferences.py:272
+msgid "All the menus at once, from a button in the title bar."
+msgstr "Todos los menús a la vez, desde un botón en la barra de título."
+
+#: usr/lib/xl-calculator/preferences.py:273
+msgid "Off: a menu bar under the title bar."
+msgstr "Desactivado: una barra de menús bajo la barra de título."
+
+#: usr/lib/xl-calculator/preferences.py:291
 msgid "Delete the saved history?"
 msgstr "¿Eliminar el historial guardado?"
 
-#: usr/lib/xl-calculator/preferences.py:250
+#: usr/lib/xl-calculator/preferences.py:292
 msgid "This clears the history and deletes the saved file. It can't be undone."
 msgstr ""
 "Esto borra el historial y elimina el archivo guardado. No se puede deshacer."
 
-#: usr/lib/xl-calculator/preferences.py:251
+#: usr/lib/xl-calculator/preferences.py:293
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: usr/lib/xl-calculator/preferences.py:252
+#: usr/lib/xl-calculator/preferences.py:294
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -1960,7 +2183,7 @@ msgstr "Página anterior"
 msgid "Next page"
 msgstr "Página siguiente"
 
-#: usr/lib/xl-calculator/printing.py:144 usr/lib/xl-calculator/window.py:165
+#: usr/lib/xl-calculator/printing.py:144 usr/lib/xl-calculator/window.py:168
 msgid "Print…"
 msgstr "Imprimir…"
 
@@ -2153,95 +2376,99 @@ msgstr "Más funciones"
 msgid "Remainder after division.  17 mod 5 = 2"
 msgstr "Resto de la división.  17 mod 5 = 2"
 
-#: usr/lib/xl-calculator/window.py:45
+#: usr/lib/xl-calculator/window.py:46
 msgid "Clear"
 msgstr "Borrar"
 
-#: usr/lib/xl-calculator/window.py:45
+#: usr/lib/xl-calculator/window.py:46
 msgid "Clear All"
 msgstr "Borrar todo"
 
-#: usr/lib/xl-calculator/window.py:45
+#: usr/lib/xl-calculator/window.py:46
 msgid "Capture"
 msgstr "Capturar"
 
-#: usr/lib/xl-calculator/window.py:45
+#: usr/lib/xl-calculator/window.py:46
 msgid "Swap"
 msgstr "Intercambiar"
 
-#: usr/lib/xl-calculator/window.py:45
+#: usr/lib/xl-calculator/window.py:46
 msgid "Auto Refresh"
 msgstr "Autoactualizar"
 
-#: usr/lib/xl-calculator/window.py:148
-msgid "File"
-msgstr "Archivo"
+#: usr/lib/xl-calculator/window.py:151
+msgid "_File"
+msgstr "_Archivo"
 
-#: usr/lib/xl-calculator/window.py:152
+#: usr/lib/xl-calculator/window.py:155
 msgid "New Window"
 msgstr "Ventana nueva"
 
-#: usr/lib/xl-calculator/window.py:159
+#: usr/lib/xl-calculator/window.py:162
 msgid "Print Preview"
 msgstr "Vista previa de impresión"
 
-#: usr/lib/xl-calculator/window.py:177
+#: usr/lib/xl-calculator/window.py:180
 msgid "Quit"
 msgstr "Salir"
 
-#: usr/lib/xl-calculator/window.py:183
-msgid "Edit"
-msgstr "Editar"
+#: usr/lib/xl-calculator/window.py:186
+msgid "_Edit"
+msgstr "_Editar"
 
-#: usr/lib/xl-calculator/window.py:187
+#: usr/lib/xl-calculator/window.py:190
 msgid "Copy"
 msgstr "Copiar"
 
-#: usr/lib/xl-calculator/window.py:192
+#: usr/lib/xl-calculator/window.py:195
 msgid "Paste"
 msgstr "Pegar"
 
-#: usr/lib/xl-calculator/window.py:204
-msgid "Mode"
-msgstr "Modo"
+#: usr/lib/xl-calculator/window.py:207
+msgid "_Mode"
+msgstr "_Modo"
 
-#: usr/lib/xl-calculator/window.py:244
-msgid "View"
-msgstr "Ver"
+#: usr/lib/xl-calculator/window.py:247
+msgid "_View"
+msgstr "_Ver"
 
-#: usr/lib/xl-calculator/window.py:249
+#: usr/lib/xl-calculator/window.py:252
 msgid "Clear History"
 msgstr "Borrar historial"
 
-#: usr/lib/xl-calculator/window.py:256
+#: usr/lib/xl-calculator/window.py:259
 msgid "Larger Font"
 msgstr "Letra más grande"
 
-#: usr/lib/xl-calculator/window.py:261
+#: usr/lib/xl-calculator/window.py:264
 msgid "Smaller Font"
 msgstr "Letra más pequeña"
 
-#: usr/lib/xl-calculator/window.py:266
+#: usr/lib/xl-calculator/window.py:269
 msgid "Reset Font Size"
 msgstr "Restablecer tamaño de letra"
 
-#: usr/lib/xl-calculator/window.py:274
+#: usr/lib/xl-calculator/window.py:277
 msgid "Reset View"
 msgstr "Restablecer vista"
 
-#: usr/lib/xl-calculator/window.py:288
+#: usr/lib/xl-calculator/window.py:282
+msgid "_Help"
+msgstr "Ay_uda"
+
+#: usr/lib/xl-calculator/window.py:291
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
-#: usr/lib/xl-calculator/window.py:295
+#: usr/lib/xl-calculator/window.py:298
 msgid "About"
 msgstr "Acerca de"
 
-#: usr/lib/xl-calculator/window.py:505
+#: usr/lib/xl-calculator/window.py:509
 msgid "Add this conversion to the history"
 msgstr "Añadir esta conversión al historial"
 
-#: usr/lib/xl-calculator/window.py:509
+#: usr/lib/xl-calculator/window.py:513
 msgid ""
 "Clear all stored financial values: N, I/Y, PV, PMT, FV, cash flows, P1/P2, "
 "and the P/Y and BGN settings"
@@ -2249,11 +2476,11 @@ msgstr ""
 "Borrar todos los valores financieros guardados: N, I/Y, PV, PMT, FV, flujos "
 "de caja, P1/P2 y los ajustes P/Y y BGN"
 
-#: usr/lib/xl-calculator/window.py:883
+#: usr/lib/xl-calculator/window.py:910
 msgid "Delete the character before the cursor (Backspace)"
 msgstr "Borrar el carácter anterior al cursor (Retroceso)"
 
-#: usr/lib/xl-calculator/window.py:1232
+#: usr/lib/xl-calculator/window.py:1261
 msgid ""
 "A calculator for Linux Mint and the Cinnamon desktop, with Basic, "
 "Scientific, Financial, Programmer, Unit Converter, and Currency Converter "
@@ -2264,7 +2491,7 @@ msgstr ""
 "Conversor de divisas."
 
 #. Translators: your name (and email), one translator per line; shown in About → Credits
-#: usr/lib/xl-calculator/window.py:1236
+#: usr/lib/xl-calculator/window.py:1265
 msgid "translator-credits"
 msgstr ""
 

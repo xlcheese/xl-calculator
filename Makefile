@@ -45,6 +45,7 @@ install: all
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/xl-calculator
 	install -d $(DESTDIR)$(PREFIX)/lib/xl-calculator
 	install -m644 $(SOURCES) $(DESTDIR)$(PREFIX)/lib/xl-calculator/
+	install -Dm644 $(PROGRAM)/icons/buffet-menu-symbolic.svg $(DESTDIR)$(PREFIX)/lib/xl-calculator/icons/buffet-menu-symbolic.svg
 	chmod 755 $(DESTDIR)$(PREFIX)/lib/xl-calculator/xl_calculator.py
 	install -Dm644 $(DESKTOP) $(DESTDIR)$(PREFIX)/share/applications/$(APP_ID).desktop
 	install -Dm644 usr/share/metainfo/$(APP_ID).metainfo.xml $(DESTDIR)$(PREFIX)/share/metainfo/$(APP_ID).metainfo.xml
