@@ -36,6 +36,11 @@
   </provides>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="0.11" date="2026-11-18">
+      <description>
+        <p>The Buffet menu: every menu at once, from a button in the title bar, with a choice of layouts in Preferences, or a classic menu bar. The Currency Converter has about 150 currencies, with rates from the European Central Bank, the United Nations Treasury and the Bank of Canada, and a list to choose the ones in its menus. The shaded keys keep the theme's highlights and shadows.</p>
+      </description>
+    </release>
     <release version="0.10" date="2026-11-06">
       <description>
         <p>Xcalculator is now called xl-Calculator, alongside xl-Screenshot and xl-Annotate. Settings, history and downloaded rates are copied over the first time it starts. The title bar shows just the mode.</p>
