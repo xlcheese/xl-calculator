@@ -50,9 +50,12 @@ install: all
 	install -Dm644 $(DESKTOP) $(DESTDIR)$(PREFIX)/share/applications/$(APP_ID).desktop
 	install -Dm644 usr/share/metainfo/$(APP_ID).metainfo.xml $(DESTDIR)$(PREFIX)/share/metainfo/$(APP_ID).metainfo.xml
 	install -Dm644 usr/share/man/man1/xl-calculator.1 $(DESTDIR)$(PREFIX)/share/man/man1/xl-calculator.1
-	for size in scalable 16x16 24x24 32x32; do \
-		install -Dm644 usr/share/icons/hicolor/$$size/apps/$(APP_ID).svg \
-			$(DESTDIR)$(PREFIX)/share/icons/hicolor/$$size/apps/$(APP_ID).svg; \
+	install -Dm644 usr/share/icons/hicolor/scalable/apps/$(APP_ID).svg \
+		$(DESTDIR)$(PREFIX)/share/icons/hicolor/scalable/apps/$(APP_ID).svg
+	# the small sizes are PNG, drawn pixel by pixel (their sources are in data/icons)
+	for size in 16x16 24x24 32x32; do \
+		install -Dm644 usr/share/icons/hicolor/$$size/apps/$(APP_ID).png \
+			$(DESTDIR)$(PREFIX)/share/icons/hicolor/$$size/apps/$(APP_ID).png; \
 	done
 	install -d $(DESTDIR)$(PREFIX)/lib/systemd/user
 	for unit in xl-calculator-rates.service xl-calculator-rates.timer; do \

@@ -112,6 +112,13 @@ Makefile, which can also be used on its own:
 - `make install` installs everything under `/usr` (or `PREFIX`, into `DESTDIR`)
 - `make pot` updates `po/xl-calculator.pot` after any text in the program changes
 
+The Flatpak is built from `flatpak/io.github.xlcheese.XlCalculator.yml` (`flatpak/TESTING.md` has
+the checklist for trying it on other desktops):
+
+```
+flatpak-builder --user --install --force-clean build-dir flatpak/io.github.xlcheese.XlCalculator.yml
+```
+
 ## Translate
 
 xl-Calculator uses gettext. Spanish, French, German, Brazilian Portuguese, and

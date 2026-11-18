@@ -256,6 +256,13 @@ def currency_name(code):
     return CurrencyNames.translation.gettext(name) if name else NEW_CURRENCY_NAMES.get(code, code)
 
 
+def english_currency_name(code):
+    """The currency's ISO 4217 name in English, for searching by it in any language."""
+    if CurrencyNames.names is None:
+        CurrencyNames.load()
+    return CurrencyNames.names.get(code) or NEW_CURRENCY_NAMES.get(code, code)
+
+
 class CurrencyNames:
     names = None                            # code -> English ISO name, read the first time
     translation = gettext.NullTranslations()
