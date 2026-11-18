@@ -13,7 +13,12 @@ from fractions import Fraction
 from i18n import N_, _
 from config import CONVERTER_MODES
 from engine import DECIMAL_RE, format_fraction
+from gi.repository import GLib
 from currency import CURRENCY, CURRENCY_START
+
+# the Currency Converter's menus end with a line, then Add or Remove Currencies… (ids, not currency codes)
+CHOOSE_SEPARATOR = "@separator"
+CHOOSE_CURRENCIES = "@choose"
 
 
 PI = Fraction("3.14159265358979323846264338327950288419716939937510582097494")
@@ -186,6 +191,8 @@ class ConverterMode:
         return CURRENCY if self.current_mode == "Currency Converter" else self.conv_category
 
     def conv_set_category(self, category):
+        """Show a category's units in both menus (the Currency Converter's currencies, then Add or Remove
+        Currencies…)."""
         if category == CURRENCY:
             units = self.currency_units()
             codes = [code for name, code, size in units]
@@ -204,12 +211,21 @@ class ConverterMode:
             for name, symbol, size in units:
                 shown = name if category == CURRENCY else _(name)     # currency names come translated
                 combo.append(symbol, f"{shown} ({symbol})" if name != symbol else symbol)
+            if category == CURRENCY:
+                combo.append(CHOOSE_SEPARATOR, "")
+                combo.append(CHOOSE_CURRENCIES, _("Add or Remove Currencies…"))
             combo.set_active_id(self.conv_units[category][index])
         self.syncing_widgets = False
         self.conv_refresh()
 
     def on_conv_unit_changed(self, combo, index):
         if self.syncing_widgets or combo.get_active_id() is None:
+            return
+        if combo.get_active_id() == CHOOSE_CURRENCIES:
+            self.syncing_widgets = True     # the menu keeps showing the currency in use
+            combo.set_active_id(self.conv_units[CURRENCY][index])
+            self.syncing_widgets = False
+            GLib.idle_add(self.show_currency_chooser)
             return
         self.conv_units[self.conv_current_category()][index] = combo.get_active_id()
         self.conv_refresh()

@@ -34,6 +34,7 @@ from preferences import PreferencesActions
 from documentation import HelpWindow
 from easter_egg import UpsideDown
 from currency import CURRENCY, CURRENCY_START, CODE_RE, DEFAULT_INTERVAL, MAX_INTERVAL, CurrencyMode
+from converter import CHOOSE_CURRENCIES, CHOOSE_SEPARATOR
 from menus import BUFFET_DEFAULTS, BuffetMenuBar, checked_buffet_settings
 
 
@@ -92,6 +93,8 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         self.conv_units[CURRENCY] = list(CURRENCY_START)
         self.currency_auto = False      # Preferences → Currency Converter, and the Auto Refresh button
         self.currency_interval = DEFAULT_INTERVAL
+        self.shown_currencies = None    # Add or Remove Currencies; None: the common ones and your own
+        self.currency_chooser = None
         self.currency_background = False
         self.currency_window_ready()
         self.conv_active = 0            # 0: typing in the top box, 1: the bottom box
@@ -350,6 +353,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
         for combo in self.conv_combos:
             combo.get_style_context().add_class("calc-unit-menu")
         for index, combo in enumerate(self.conv_combos):
+            combo.set_row_separator_func(lambda model, row: model[row][1] == CHOOSE_SEPARATOR)
             combo.set_size_request(190, -1)
             combo.set_no_show_all(True)
             Gtk.Widget.set_focus_on_click(combo, False)  # ComboBox's own version is deprecated
@@ -766,6 +770,9 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
                     if isinstance(interval, int) and 1 <= interval <= MAX_INTERVAL:
                         self.currency_interval = interval
                     self.currency_background = config.get("currency_background") is True
+                    shown = config.get("currencies")
+                    if isinstance(shown, list) and all(isinstance(c, str) and CODE_RE.fullmatch(c) for c in shown):
+                        self.shown_currencies = shown
                     self.buffet_on = config.get("buffet_menu") is not False
                     self.buffet_settings = checked_buffet_settings(config.get("buffet"))
                     return
@@ -795,6 +802,7 @@ class XCalculator(BasicMode, ScientificMode, FinancialMode, ProgrammerMode, Conv
                 "currency_auto": self.currency_auto,
                 "currency_interval": self.currency_interval,
                 "currency_background": self.currency_background,
+                "currencies": self.shown_currencies,
                 "buffet_menu": self.buffet_on,
                 "buffet": self.buffet_settings,
             }
