@@ -6,7 +6,9 @@
 # either version 3 of the License, or (at your option) any later version.
 # It is distributed WITHOUT ANY WARRANTY; see <https://www.gnu.org/licenses/>.
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Currency Converter mode: exchange rates from the European Central Bank.
+"""Currency Converter mode: exchange rates from the European Central Bank (30 currencies, every working
+day), the United Nations Treasury (about 120 more, set once or twice a month) and the Bank of Canada (the
+Taiwan dollar, every working day).
 
 Nothing is downloaded until the person clicks Download Rates. After that, rates are
 refreshed when they click Refresh Rates, or automatically every few days if they switch
@@ -14,6 +16,7 @@ Auto Refresh on: while xl-Calculator is open, and also when it's closed if they 
 in Preferences (a systemd user timer runs "xl-calculator --refresh-rates" once a day)."""
 import gettext
 import json
+import locale
 import os
 import re
 import subprocess
@@ -32,9 +35,19 @@ from engine import DECIMAL_RE
 # XL_CALCULATOR_RATES_URL lets the tests use a local copy instead
 RATES_URL = os.environ.get("XL_CALCULATOR_RATES_URL",
                            "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")
+# The United Nations' operational rates (units per US dollar), for the currencies the bank doesn't
+# have, and the Bank of Canada's rate for the Taiwan dollar (Canadian dollars per Taiwan dollar).
+# When the tests set XL_CALCULATOR_RATES_URL, these are left out unless the tests set them too.
+TESTING = "XL_CALCULATOR_RATES_URL" in os.environ
+UN_URL = os.environ.get("XL_CALCULATOR_UN_URL",
+                        None if TESTING else "https://treasury.un.org/operationalrates/xsql2XML.php")
+BOC_URL = os.environ.get("XL_CALCULATOR_BOC_URL",
+                         None if TESTING else "https://www.bankofcanada.ca/valet/observations/FXTWDCAD/json?recent=1")
+UN_DAYS = 14                                # the UN sets its rates once or twice a month: fetched at most this often
+USER_AGENT = f"xl-Calculator/{APP_VERSION} (+https://github.com/xlcheese/xl-calculator)"
 RATES_DIR = os.path.join(GLib.get_user_cache_dir(), "xl-calculator")      # ~/.cache/xl-calculator
 RATES_FILE = os.path.join(RATES_DIR, "rates.json")
-MAX_RATES_SIZE = 200000                     # bytes; the real file is about 2 kB
+MAX_RATES_SIZE = 500000                     # bytes; the bank's file is about 2 kB, the UN's about 50 kB
 CURRENCY = "Currency"                       # the converter's "category" in this mode
 CURRENCY_START = ("USD", "EUR")             # the first time; then the last pair used
 DEFAULT_INTERVAL = 3                        # days between automatic refreshes
@@ -53,8 +66,19 @@ BANK_CURRENCIES = ("AUD", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP"
 # Currency names come from the iso-codes package (in every Linux Mint), already translated
 # into over 160 languages: the official ISO 4217 names, such as "Yen" and "Pound Sterling".
 ISO_4217_FILE = "/usr/share/iso-codes/json/iso_4217.json"
-# decimal places each currency is written with (ISO 4217); all the others use 2
-CURRENCY_DECIMALS = {"JPY": 0, "KRW": 0, "ISK": 0}
+# decimal places each currency is written with (ISO 4217's minor units); all the others use 2
+CURRENCY_DECIMALS = {**{code: 0 for code in ("BIF", "CLP", "DJF", "GNF", "ISK", "JPY", "KMF", "KRW", "PYG",
+                                             "RWF", "UGX", "VND", "VUV", "XAF", "XOF", "XPF")},
+                     **{code: 3 for code in ("BHD", "IQD", "JOD", "KWD", "LYD", "OMR", "TND")}}
+# The menus offer these at first, the most traded currencies (as in the Bank for International
+# Settlements' survey), and the currency of the person's own region; Add or Remove Currencies changes it.
+COMMON_CURRENCIES = ("USD", "EUR", "JPY", "GBP", "CNY", "AUD", "CAD", "CHF", "HKD", "SGD", "SEK", "KRW",
+                     "NOK", "NZD", "INR", "MXN", "TWD", "ZAR", "BRL", "DKK")
+# English names for currencies newer than the iso-codes package in the person's Linux Mint
+NEW_CURRENCY_NAMES = {"XCG": "Caribbean Guilder", "ZWG": "Zimbabwe Gold"}
+# Where each currency's rate comes from
+ECB, UN, BOC = "ecb", "un", "boc"
+UN_MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 CODE_RE = re.compile(r'[A-Z]{3}')
 
 
@@ -74,34 +98,117 @@ def parse_rates(text):
     return date.group(1), rates
 
 
-def download_rates():
-    """Download today's rates and keep a copy. Raises OSError or ValueError on failure."""
-    request = urllib.request.Request(RATES_URL, headers={"User-Agent": f"xl-Calculator/{APP_VERSION}"})
+def parse_un_rates(text):
+    """The UN Treasury's XML: (date, {code: units per US dollar}). The date is the latest any rate took effect."""
+    rates, dates = {}, set()
+    for entry in re.findall(r"<UN_OPERATIONAL_RATES>(.*?)</UN_OPERATIONAL_RATES>", text, re.S):
+        code = re.search(r"<f_curr_code>\s*([A-Z]{3})\s*</f_curr_code>", entry)
+        rate = re.search(r"<rate>\s*(\d+(?:\.\d+)?)\s*</rate>", entry)
+        date = re.search(r"<eff_date>\s*(\d{1,2}) ([A-Z][a-z]{2}) (\d{4})\s*</eff_date>", entry)
+        if not (code and rate and date) or date.group(2) not in UN_MONTHS or Fraction(rate.group(1)) <= 0:
+            continue
+        rates[code.group(1)] = Fraction(rate.group(1))
+        dates.add(f"{date.group(3)}-{UN_MONTHS.index(date.group(2)) + 1:02d}-{int(date.group(1)):02d}")
+    if len(rates) < 50:
+        raise ValueError("not the UN Treasury's rates file")
+    rates.pop("USD", None)
+    return max(dates), rates
+
+
+def parse_boc_rate(text):
+    """The Bank of Canada's Taiwan dollar: (date, {"TWD": Canadian dollars per Taiwan dollar})."""
+    observation = json.loads(text)["observations"][-1]
+    rate = Fraction(observation["FXTWDCAD"]["v"])
+    datetime.strptime(observation["d"], "%Y-%m-%d")
+    if rate <= 0:
+        raise ValueError("not a rate")
+    return observation["d"], {"TWD": rate}
+
+
+def fetch(url):
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     with urllib.request.urlopen(request, timeout=20) as response:
-        text = response.read(MAX_RATES_SIZE).decode("utf-8", "replace")
-    date, rates = parse_rates(text)
-    data = {"date": date, "downloaded": time.time(), "rates": {c: str(r) for c, r in rates.items()}}
+        return response.read(MAX_RATES_SIZE).decode("utf-8", "replace")
+
+
+def download_rates():
+    """Download today's rates and keep a copy. Raises OSError or ValueError if the European Central Bank's
+    can't be had: they are needed for all the others. The UN Treasury's (fetched only when ours are two
+    weeks old) and the Bank of Canada's are kept from last time if they can't be downloaded."""
+    date, rates = parse_rates(fetch(RATES_URL))
+    now = time.time()
+    data = {"date": date, "downloaded": now, "rates": {c: str(r) for c, r in rates.items()}}
+    previous = read_rates_file() or {}
+    for key, url, parse, due in ((UN, UN_URL, parse_un_rates, UN_DAYS * 86400 - 600),
+                                 (BOC, BOC_URL, parse_boc_rate, 0)):
+        part = previous.get(key)
+        if url and (not isinstance(part, dict) or now - part.get("downloaded", 0) >= due):
+            try:
+                part_date, part_rates = parse(fetch(url))
+                part = {"date": part_date, "downloaded": now, "rates": {c: str(r) for c, r in part_rates.items()}}
+            except (OSError, ValueError, KeyError, IndexError, TypeError) as error:
+                print(f"Couldn't download the {key.upper()} exchange rates: {error}")
+        if isinstance(part, dict):
+            data[key] = part
     os.makedirs(RATES_DIR, exist_ok=True)
     temporary = RATES_FILE + ".new"
     with open(temporary, "w") as f:
         json.dump(data, f)
     os.replace(temporary, RATES_FILE)       # never a half-written file, even if two run at once
-    return data
+    return checked_rates(data)
+
+
+def read_rates_file():
+    try:
+        with open(RATES_FILE) as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else None
+    except (OSError, ValueError):
+        return None
+
+
+def checked_part(part):
+    """One source's rates from the file, checked: (date, downloaded, {code: Fraction}), or None."""
+    try:
+        rates = {c: Fraction(r) for c, r in part["rates"].items() if CODE_RE.fullmatch(c)}
+        datetime.strptime(part["date"], "%Y-%m-%d")
+        if not rates or not all(r > 0 for r in rates.values()):
+            return None
+        return part["date"], float(part["downloaded"]), rates
+    except (ValueError, KeyError, TypeError, AttributeError, ZeroDivisionError):
+        return None
+
+
+def checked_rates(data):
+    """Every currency's rate in euros, from all three sources, with where each comes from:
+    {"date", "downloaded", "rates": {code: units per euro}, "sources": {code: ECB, UN or BOC},
+    "dates": {source: date}}. The bank's US and Canadian dollars bridge the other two."""
+    bank = checked_part(data)
+    if bank is None or len(bank[2]) < 5 or "USD" not in bank[2]:
+        return None
+    date, downloaded, euro_rates = bank
+    rates = dict(euro_rates)
+    sources = {code: ECB for code in rates}
+    dates = {ECB: date}
+    un = checked_part(data.get(UN))
+    if un is not None:
+        dates[UN] = un[0]
+        for code, per_dollar in un[2].items():
+            if code not in rates:
+                rates[code], sources[code] = per_dollar * euro_rates["USD"], UN
+    boc = checked_part(data.get(BOC))
+    if boc is not None and "CAD" in euro_rates and "TWD" in boc[2]:
+        dates[BOC] = boc[0]
+        if "TWD" not in rates or sources["TWD"] == UN:
+            rates["TWD"], sources["TWD"] = euro_rates["CAD"] / boc[2]["TWD"], BOC
+    return {"date": date, "downloaded": downloaded, "rates": {c: str(r) for c, r in rates.items()},
+            "sources": sources, "dates": dates}
 
 
 def load_rates():
     """The rates downloaded last time, or None."""
-    try:
-        with open(RATES_FILE) as f:
-            data = json.load(f)
-        rates = {c: Fraction(r) for c, r in data["rates"].items() if CODE_RE.fullmatch(c)}
-        datetime.strptime(data["date"], "%Y-%m-%d")
-        if len(rates) < 5 or not all(r > 0 for r in rates.values()):
-            return None
-        return {"date": data["date"], "downloaded": float(data["downloaded"]),
-                "rates": {c: str(r) for c, r in rates.items()}}
-    except (OSError, ValueError, KeyError, TypeError, ZeroDivisionError):
-        return None
+    data = read_rates_file()
+    return checked_rates(data) if data is not None else None
 
 
 def rates_due(data, interval):
@@ -146,7 +253,7 @@ def currency_name(code):
     if CurrencyNames.names is None:
         CurrencyNames.load()
     name = CurrencyNames.names.get(code)
-    return CurrencyNames.translation.gettext(name) if name else code
+    return CurrencyNames.translation.gettext(name) if name else NEW_CURRENCY_NAMES.get(code, code)
 
 
 class CurrencyNames:
@@ -161,6 +268,39 @@ class CurrencyNames:
         except (OSError, ValueError, KeyError, TypeError):
             cls.names = {}                  # no iso-codes: the codes alone
         cls.translation = gettext.translation("iso_4217", fallback=True)
+
+
+def rate_sources(sources, a, b):
+    """The sources a conversion between currencies a and b depends on. The UN's rates are in US dollars
+    and the Bank of Canada's in Canadian dollars: against those, nothing else is needed; against any
+    other currency, the bank's dollar rates are the bridge."""
+    source_a, source_b = sources.get(a, ECB), sources.get(b, ECB)
+    if source_a == source_b:
+        return {source_a}
+    if {source_a, source_b} == {UN, BOC}:
+        return {UN, BOC, ECB}
+    other, bank_code = (source_b, a) if source_a == ECB else (source_a, b)
+    return {other} if bank_code == {UN: "USD", BOC: "CAD"}[other] else {other, ECB}
+
+
+def local_currency():
+    """The currency of the person's region (from their locale), such as "USD", or None."""
+    try:
+        code = locale.localeconv()["int_curr_symbol"].strip()[:3]
+    except (ValueError, KeyError):
+        return None
+    return code if CODE_RE.fullmatch(code) else None
+
+
+def offered_currencies():
+    """Every currency there's a rate for: the bank's own before the first download."""
+    data = Rates.get()
+    return list(data["rates"]) if data else list(BANK_CURRENCIES)
+
+
+def default_shown_currencies():
+    local = local_currency()
+    return list(COMMON_CURRENCIES) + ([local] if local and local not in COMMON_CURRENCIES else [])
 
 
 class Rates:
@@ -235,7 +375,7 @@ class CurrencyMode:
     CURRENCY_TOOLTIPS = {
         'Swap': N_("Exchange the two currencies"),
         'Auto Refresh': N_("Refresh the exchange rates automatically. Change how often in Edit → Preferences."),
-        'Refresh Rates': N_("Download today's rates from the European Central Bank"),
+        'Refresh Rates': N_("Download today's exchange rates"),
     }
 
     def currency_window_ready(self):
@@ -252,10 +392,36 @@ class CurrencyMode:
         return True
 
     def currency_units(self):
-        """(name, code, None) for each currency the menus offer, by name."""
-        data = Rates.get()
-        codes = data["rates"] if data else BANK_CURRENCIES
+        """(name, code, None) for each currency the menus offer, by name: the ones ticked in Add or Remove
+        Currencies that there's a rate for, and always the two in use."""
+        shown = set(self.shown_currency_codes()) | set(self.conv_units[CURRENCY])
+        codes = [c for c in offered_currencies() if c in shown]
         return sorted(((currency_name(c), c, None) for c in codes), key=lambda unit: unit[0].casefold())
+
+    def shown_currency_codes(self):
+        return self.shown_currencies if self.shown_currencies is not None else default_shown_currencies()
+
+    def set_shown_currencies(self, codes, everywhere=True):
+        """Add or Remove Currencies (None: the common ones, as at first), in every window."""
+        self.shown_currencies = None if codes is None else list(codes)
+        self.save_window_settings()
+        if self.current_mode == "Currency Converter":
+            self.conv_set_category(CURRENCY)
+        if self.currency_chooser is not None:
+            self.currency_chooser.sync()
+        self.sync_preferences()
+        if everywhere:
+            for window in self.other_calculators():
+                window.set_shown_currencies(codes, everywhere=False)
+
+    def show_currency_chooser(self, widget=None):
+        """The menus' Add or Remove Currencies…, and Preferences → Choose…"""
+        from currency_chooser import CurrencyChooser
+        if self.currency_chooser is None:
+            self.currency_chooser = CurrencyChooser(self)
+            self.currency_chooser.connect("destroy", lambda *args: setattr(self, "currency_chooser", None))
+        self.currency_chooser.present()
+        return False
 
     def currency_entered(self):
         """The Currency Converter has just been shown."""
@@ -351,12 +517,12 @@ class CurrencyMode:
         if self.currency_message:
             return self.currency_message
         if Rates.downloading:
-            return _("Downloading exchange rates from the European Central Bank…")
+            return _("Downloading exchange rates…")
         if data is None:
             if Rates.failed:
                 return (_("Couldn't reach the European Central Bank.") + "\n"
                         + _("Check the internet connection, then click Download Rates again."))
-            return (_("Exchange rates come from the European Central Bank, once a day.") + "\n"
+            return (_("Exchange rates come from central banks and the UN Treasury.") + "\n"
                     + _("Click Download Rates to get today's rates."))
         rates = data["rates"]
         line = "{one} {a} = {rate} {b}    {one} {b} = {back} {a}".format(
@@ -366,7 +532,25 @@ class CurrencyMode:
         if Rates.failed:
             return line + "\n" + _("Couldn't download new rates. Using the rates from {date}.").format(
                 date=rates_date_text(data))
-        return line + "\n" + _("European Central Bank rates, {date}").format(date=rates_date_text(data))
+        return line + "\n" + self.rates_sources_line(data, from_code, to_code)
+
+    @staticmethod
+    def rates_sources_line(data, from_code, to_code):
+        """Where this pair's rates come from, and their dates."""
+        used = rate_sources(data["sources"], from_code, to_code)
+        if used == {ECB}:
+            return _("European Central Bank rates, {date}").format(date=rates_date_text(data))
+        dated = lambda source: rates_date_text({"date": data["dates"][source]})
+        parts = {ECB: lambda: _("European Central Bank, {date}").format(date=dated(ECB)),
+                 UN: lambda: _("UN Treasury, {date}").format(date=dated(UN)),
+                 BOC: lambda: _("Bank of Canada, {date}").format(date=dated(BOC))}
+        if used == {UN}:
+            return _("UN Treasury operational rates, {date}").format(date=dated(UN))
+        if used == {BOC}:
+            return _("Bank of Canada rates, {date}").format(date=dated(BOC))
+        # Translators: the sources of the two rates, each with its date, such as
+        # "Rates: UN Treasury, Nov 15, 2026 · European Central Bank, Nov 17, 2026"
+        return _("Rates: {sources}").format(sources=" · ".join(parts[s]() for s in (UN, BOC, ECB) if s in used))
 
     def start_rates_download(self):
         """Download new rates without freezing the window; every open window then updates."""

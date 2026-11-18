@@ -10,9 +10,10 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
-from i18n import _
+from i18n import _, ngettext
 from config import CONVERTER_MODES, VALID_MODES
-from currency import DEFAULT_INTERVAL, MAX_INTERVAL, Rates, background_refresh_available, set_background_refresh
+from currency import (DEFAULT_INTERVAL, MAX_INTERVAL, Rates, background_refresh_available, offered_currencies,
+                      set_background_refresh)
 from engine import DEFAULT_DECIMALS, MAX_DECIMALS, NUMBER_FORMAT, format_number, mpmath
 from history import SavedHistory
 from buffet import LAYOUT_FIXED
@@ -25,7 +26,7 @@ MODE_DESCRIPTIONS = {
     "Financial": _("Loans, savings, cash flows, and depreciation"),
     "Programmer": _("Hexadecimal, binary, and bitwise operations"),
     "Unit Converter": _("Lengths, weights, temperatures, and more"),
-    "Currency Converter": _("Exchange rates from the European Central Bank"),
+    "Currency Converter": _("Exchange rates for about 150 currencies"),
 }
 
 
@@ -178,6 +179,9 @@ class PreferencesWindow(Gtk.Window):
         self.currency_closed_switch.connect("notify::active", lambda s, p: self.changed(
             lambda: c.set_currency_background(s.get_active())))
         self.currency_closed_hint = self.row(box, _("Also when xl-Calculator is closed"), self.currency_closed_switch, "")
+        choose = Gtk.Button(label=_("Choose…"))
+        choose.connect("clicked", lambda b: c.show_currency_chooser())
+        self.currencies_hint = self.row(box, _("Currencies in the menus"), choose, "")
 
         self.heading(box, _("History"))
         self.keep_switch = Gtk.Switch()
@@ -257,7 +261,7 @@ class PreferencesWindow(Gtk.Window):
         self.currency_auto_switch.set_active(c.currency_auto)
         self.currency_auto_switch.set_sensitive(have_rates)     # like the Auto Refresh button
         self.currency_auto_hint.set_text(
-            _("The same as the Auto Refresh button. Rates come from the European Central Bank.") if have_rates
+            _("The same as the Auto Refresh button.") if have_rates
             else _("Click Download Rates in the Currency Converter first."))
         self.currency_days.set_value(c.currency_interval)
         self.currency_days.set_sensitive(c.currency_auto)
@@ -280,6 +284,10 @@ class PreferencesWindow(Gtk.Window):
             line.set_sensitive(c.buffet_on)
         self.buffet_per_row.set_value(c.buffet_settings["per-row"])
         self.buffet_per_row.get_parent().set_sensitive(c.buffet_on and c.buffet_settings["layout"] == LAYOUT_FIXED)
+        offered = offered_currencies()
+        shown = sum(1 for code in offered if code in set(c.shown_currency_codes()))
+        self.currencies_hint.set_text(ngettext("{count} of {total} currencies", "{count} of {total} currencies", shown)
+                                      .format(count=shown, total=len(offered)))
         for mode, switch in self.mode_switches.items():
             on = mode in c.enabled_modes
             switch.set_active(on)
@@ -423,6 +431,7 @@ class PreferencesActions:
         self.set_currency_background(False)
         self.set_currency_interval(DEFAULT_INTERVAL)
         self.set_currency_auto(False)
+        self.set_shown_currencies(None)
         self.set_buffet_on(True)
         for key, value in BUFFET_DEFAULTS.items():
             self.set_buffet_setting(key, value)
