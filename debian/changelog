@@ -1,3 +1,22 @@
+xl-calculator (0.11) unstable; urgency=medium
+
+  * The Buffet menu: every menu at once, from a button in the title bar
+    (F10, or Alt and a menu's underlined letter). Preferences has a Menu
+    tab to change how it lays out its menus, or to go back to a menu bar.
+    The menu titles now have access keys in the menu bar too.
+  * The Currency Converter has 152 currencies: the United Nations
+    Treasury's operational rates (fetched at most every two weeks) and the
+    Bank of Canada's rate for the New Taiwan Dollar join the European
+    Central Bank's. The menus offer the most traded currencies and the
+    person's own; Add or Remove Currencies… (also in Preferences) chooses
+    from all of them. The line under the boxes names each rate's source
+    and date, and every currency has its own decimal places.
+  * The shaded keys keep the theme's own highlights and drop shadows, and
+    a key that changes style no longer makes the window grow.
+  * A draft Russian translation, waiting for a review by a native speaker.
+
+ -- Wesley Hayslip <xl_cheese@hotmail.com>  Wed, 18 Nov 2026 12:00:00 +0000
+
 xl-calculator (0.10) unstable; urgency=medium
 
   * Xcalculator is now called xl-Calculator, alongside xl-Screenshot and
