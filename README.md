@@ -114,8 +114,8 @@ Makefile, which can also be used on its own:
 
 ## Translate
 
-xl-Calculator uses gettext. Spanish, French, German, and Brazilian Portuguese
-are included as drafts that still need a review by native speakers:
+xl-Calculator uses gettext. Spanish, French, German, Brazilian Portuguese, and
+Russian are included as drafts that still need a review by native speakers:
 corrections are very welcome.
 
 To start a new language, for example Italian:
