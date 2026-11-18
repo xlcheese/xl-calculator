@@ -13,6 +13,7 @@ xl-calculator (0.11) unstable; urgency=medium
     and date, and every currency has its own decimal places.
   * The shaded keys keep the theme's own highlights and drop shadows, and
     a key that changes style no longer makes the window grow.
+  * A draft Russian translation, waiting for a review by a native speaker.
 
  -- Wesley Hayslip <xl_cheese@hotmail.com>  Wed, 18 Nov 2026 12:00:00 +0000
 
