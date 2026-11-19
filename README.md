@@ -46,7 +46,7 @@ Menu** sets how it lays out its menus, or switches back to a classic menu bar.
 
 ## Install
 
-Download the `.deb` from the [latest release](https://github.com/xlcheese/xl-calculator/releases/latest)
+Download the `.deb` from the [latest release](https://github.com/xlcheese/xlcalculator/releases/latest)
 and open it, or install it from a terminal:
 
 ```

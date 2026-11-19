@@ -27,34 +27,34 @@
   <developer id="io.github.xlcheese">
     <name>Wesley Hayslip</name>
   </developer>
-  <url type="homepage">https://github.com/xlcheese/xl-calculator</url>
-  <url type="bugtracker">https://github.com/xlcheese/xl-calculator/issues</url>
-  <url type="vcs-browser">https://github.com/xlcheese/xl-calculator</url>
-  <url type="translate">https://github.com/xlcheese/xl-calculator#translate</url>
+  <url type="homepage">https://github.com/xlcheese/xlcalculator</url>
+  <url type="bugtracker">https://github.com/xlcheese/xlcalculator/issues</url>
+  <url type="vcs-browser">https://github.com/xlcheese/xlcalculator</url>
+  <url type="translate">https://github.com/xlcheese/xlcalculator#translate</url>
   <screenshots>
     <screenshot type="default">
       <caption>Scientific mode</caption>
-      <image>https://raw.githubusercontent.com/xlcheese/xl-calculator/v0.12/screenshots/scientific.png</image>
+      <image>https://raw.githubusercontent.com/xlcheese/xlcalculator/v0.12/screenshots/scientific.png</image>
     </screenshot>
     <screenshot>
       <caption>Every menu at once, from one button</caption>
-      <image>https://raw.githubusercontent.com/xlcheese/xl-calculator/v0.12/screenshots/buffet-menu.png</image>
+      <image>https://raw.githubusercontent.com/xlcheese/xlcalculator/v0.12/screenshots/buffet-menu.png</image>
     </screenshot>
     <screenshot>
       <caption>About 150 currencies, with official rates</caption>
-      <image>https://raw.githubusercontent.com/xlcheese/xl-calculator/v0.12/screenshots/currency-converter.png</image>
+      <image>https://raw.githubusercontent.com/xlcheese/xlcalculator/v0.12/screenshots/currency-converter.png</image>
     </screenshot>
     <screenshot>
       <caption>Loans, savings, cash flows, and depreciation</caption>
-      <image>https://raw.githubusercontent.com/xlcheese/xl-calculator/v0.12/screenshots/financial.png</image>
+      <image>https://raw.githubusercontent.com/xlcheese/xlcalculator/v0.12/screenshots/financial.png</image>
     </screenshot>
     <screenshot>
       <caption>Hexadecimal, binary, and bitwise operators</caption>
-      <image>https://raw.githubusercontent.com/xlcheese/xl-calculator/v0.12/screenshots/programmer.png</image>
+      <image>https://raw.githubusercontent.com/xlcheese/xlcalculator/v0.12/screenshots/programmer.png</image>
     </screenshot>
     <screenshot>
       <caption>Twelve kinds of units, converted as you type</caption>
-      <image>https://raw.githubusercontent.com/xlcheese/xl-calculator/v0.12/screenshots/unit-converter.png</image>
+      <image>https://raw.githubusercontent.com/xlcheese/xlcalculator/v0.12/screenshots/unit-converter.png</image>
     </screenshot>
   </screenshots>
   <branding>

@@ -30,7 +30,7 @@ $(DESKTOP): data/$(APP_ID).desktop.in $(wildcard po/*.po)
 	msgfmt --desktop $(DESKTOP_KEYWORDS) --template=$< -d po --output-file=$@
 
 POT_HEADER = --package-name=xl-Calculator --package-version=$(VERSION) --copyright-holder="Wesley Hayslip" \
-	--msgid-bugs-address=https://github.com/xlcheese/xl-calculator/issues
+	--msgid-bugs-address=https://github.com/xlcheese/xlcalculator/issues
 
 pot:
 	xgettext --language=Python --from-code=UTF-8 --keyword=_ --keyword=N_ --add-comments=Translators \
